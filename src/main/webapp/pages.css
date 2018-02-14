@@ -1,0 +1,26 @@
+body {
+    background-color: lightskyblue;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+}
+
+.header {
+    color: darkblue;
+}
+
+.blueHeader {
+    color: blue;
+    font-weight: bold;
+}
+
+.deepskyblueHeader {
+    color: deepskyblue;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+}

@@ -1,0 +1,119 @@
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <!--CONTROLLERS-->
+
+    <!--question-->
+    <servlet>
+        <servlet-name>QuestionController</servlet-name>
+        <servlet-class>com.company.quiz.controller.QuestionController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuestionController</servlet-name>
+        <url-pattern>/question.do</url-pattern>
+    </servlet-mapping>
+
+    <!--quiz-->
+    <servlet>
+        <servlet-name>QuizController</servlet-name>
+        <servlet-class>com.company.quiz.controller.QuizController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuizController</servlet-name>
+        <url-pattern>/quiz.do</url-pattern>
+    </servlet-mapping>
+
+    <!--quizAddToBucket-->
+    <servlet>
+        <servlet-name>QuizAddToBucketController</servlet-name>
+        <servlet-class>com.company.quiz.controller.QuizAddToBucketController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuizAddToBucketController</servlet-name>
+        <url-pattern>/quizAddToBucket.do</url-pattern>
+    </servlet-mapping>
+
+    <!--quizRemoveFromBucket-->
+    <servlet>
+        <servlet-name>QuizRemoveFromBucketController</servlet-name>
+        <servlet-class>com.company.quiz.controller.QuizRemoveFromBucketController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuizRemoveFromBucketController</servlet-name>
+        <url-pattern>/quizRemoveFromBucket.do</url-pattern>
+    </servlet-mapping>
+    
+    <!--quizAll-->
+    <servlet>
+        <servlet-name>QuizAllController</servlet-name>
+        <servlet-class>com.company.quiz.controller.QuizAllController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuizAllController</servlet-name>
+        <url-pattern>/quizAll.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.company.quiz.controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout.do</url-pattern>
+    </servlet-mapping>
+
+    <!--FILTERS-->
+
+    <!--Security-->
+
+    <filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>com.company.quiz.filter.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+    <!--Login-->
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.company.quiz.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login.do</url-pattern>
+    </filter-mapping>
+
+    <!--Performance-->
+    <filter>
+        <filter-name>PerformanceFilter</filter-name>
+        <filter-class>com.company.quiz.filter.PerformanceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PerformanceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/show-error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/show-error.jsp</location>
+    </error-page>
+
+
+    <!--APPLICATION CONTEXT-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:appContext-dao.xml</param-value>
+    </context-param>
+
+</web-app>

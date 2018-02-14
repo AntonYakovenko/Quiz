@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.company</groupId>
+    <artifactId>quiz</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>quiz Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <spring.version>5.0.3.RELEASE</spring.version>
+        <jdk.version>1.9</jdk.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--DB-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.39</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--JSTL-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!--Spring (Business Logic Container)-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>quiz</finalName>
+        <pluginManagement>
+            <plugins>
+                <!--явно указываем плагину, отвечающему за компиляцию-->
+                <!--параметры -source и -target, которые будут переданы при вызове javac-->
+                <!--javac -source 1.9, - target 1.9 ...-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                    </configuration>
+                </plugin>
+
+                <!--Пример "внедрения" в build life-cycle-->
+                <!--Копируем все исходники проекта в quiz.war/META-INF/project-sources/-->
+                <plugin>
+                    <!--Работа будет выполнена этим плагином-->
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                        <execution>
+                            <!--Нами придуманное имя goal-a-->
+                            <id>copy-project-sources</id>
+                            <!--Фаза build life-cycle, на которой выполним работу-->
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <!--goal плагина, который вызываем-->
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <!--Конфигурационные данные, необходимые плагину для выполнения-->
+                            <configuration>
+                                <!--Файлы из этого места-->
+                                <resources>
+                                    <resource>
+                                        <directory>src/main/java</directory>
+                                        <filtering>false</filtering>
+                                    </resource>
+                                </resources>
+                                <!--копируем сюда-->
+                                <outputDirectory>${basedir}/target/quiz/META-INF/project-sources/</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
