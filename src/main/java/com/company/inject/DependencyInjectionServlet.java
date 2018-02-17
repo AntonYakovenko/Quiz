@@ -20,7 +20,7 @@ public class DependencyInjectionServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         String appCtxPath = this.getServletContext().getInitParameter(APP_CTX_PATH);
-        logger.debug("load " + APP_CTX_PATH + " -> " + appCtxPath);
+        logger.trace("load " + APP_CTX_PATH + " -> " + appCtxPath);
 
         if (appCtxPath == null) {
             logger.error("I need init param " + APP_CTX_PATH);
@@ -28,23 +28,18 @@ public class DependencyInjectionServlet extends HttpServlet {
         }
 
         try {
-            // load AppContext
-            // todo: need to read configLocation from web.xml
-            ApplicationContext appCtx = new ClassPathXmlApplicationContext(appCtxPath);
-            //then inject from AppContext to all marked by @Inject fields
+            //inject from AppContext to all marked by @Inject fields
             List<Field> allFields = FieldReflector.collectUpTo(this.getClass(), DependencyInjectionServlet.class);
             List<Field> injectFields = FieldReflector.filterInject(allFields);
-
-            System.out.println(this.getClass().getSimpleName() + "::injectFields ==== " + injectFields);
 
             for (Field field : injectFields) {
                 field.setAccessible(true);
                 Inject annotation = field.getAnnotation(Inject.class);
-                logger.debug("I find method marked by @Inject: " + field);
+                logger.trace("I find method marked by @Inject: " + field);
                 String beanName = annotation.value();
-                logger.debug("I must instantiate and inject '" + beanName + "'");
-                Object bean = appCtx.getBean(beanName);
-                logger.debug("Instantiation - OK: '" + beanName + "'");
+                logger.trace("I must instantiate and inject '" + beanName + "'");
+                Object bean = AppContext.getInstance().getBean(beanName);
+                logger.trace("Instantiation - OK: '" + beanName + "'");
                 if (bean == null) {
                     throw new ServletException("There isn't bean with name '" + beanName + "'");
                 }

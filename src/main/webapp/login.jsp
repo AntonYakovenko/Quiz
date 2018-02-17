@@ -13,16 +13,15 @@
     <link rel="stylesheet" href="pages.css">
 </head>
 <body>
-<h2 class="header">Registration page</h2>
+<h2 class="header">Login page</h2>
 <form action="login.do?redirectTo=${param.redirectTo}" method="post"
       enctype="application/x-www-form-urlencoded">
     <label for="login">Login:</label>
-    <br><input name="login" id="login" type="text" placeholder="Enter login..."/>
+    <br><input name="login" id="login" type="text" placeholder="Enter login..."/> ${errorMap.login}
     <br><label for="password">Password:</label>
-    <br><input name="password" id="password" type="password" placeholder="Enter password..."/>
+    <br><input name="password" id="password" type="password" placeholder="Enter password..."/> ${errorMap.password}
     <br><br><input type="submit"/>
 </form>
-<p class="error">${wrongAuthorization}</p>
-// you can be Mike/123 or Sara/123
+<p><a href="register">Register new User</a></p>
 </body>
 </html>

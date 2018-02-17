@@ -1,7 +1,7 @@
 package com.company.quiz.entity;
 
 public class User {
-    private /*final*/ int id;
+    private int id;
     private String login;
     private String name;
     private String password;
@@ -10,6 +10,7 @@ public class User {
     public User(){}
 
     public User(int id, String login, String name, String password, String email) {
+        this.id = id;
         this.login = login;
         this.name = name;
         this.password = password;

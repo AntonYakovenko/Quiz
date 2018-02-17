@@ -1,16 +1,17 @@
 package com.company.quiz.filter;
 
-import com.company.inject.DependencyInjectionFilter;
 import org.apache.log4j.Logger;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.company.util.ClassName.getCurrentClassName;
 
-public class PerformanceFilter extends DependencyInjectionFilter implements Filter {
+public class PerformanceFilter extends BaseFilter implements Filter {
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 
     @Override
@@ -18,6 +19,6 @@ public class PerformanceFilter extends DependencyInjectionFilter implements Filt
         long inTime = System.nanoTime();
         chain.doFilter(request, response);
         long outTime = System.nanoTime();
-        logger.debug("dT = "  + (outTime - inTime));
+        logger.trace("dT = "  + (outTime - inTime));
     }
 }

@@ -55,6 +55,27 @@
         <url-pattern>/quizAll.do</url-pattern>
     </servlet-mapping>
 
+    <!--RegisterNewUser-->
+    <servlet>
+        <servlet-name>RegisterNewUserController</servlet-name>
+        <servlet-class>com.company.quiz.controller.RegisterNewUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterNewUserController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <!--Login-->
+
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>com.company.quiz.controller.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login.do</url-pattern>
+    </servlet-mapping>
+
     <!--Logout-->
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -70,23 +91,12 @@
     <!--Security-->
 
     <filter>
-        <filter-name>securityFilter</filter-name>
+        <filter-name>SecurityFilter</filter-name>
         <filter-class>com.company.quiz.filter.SecurityFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>securityFilter</filter-name>
+        <filter-name>SecurityFilter</filter-name>
         <url-pattern>*.do</url-pattern>
-    </filter-mapping>
-
-    <!--Login-->
-
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>com.company.quiz.filter.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/login.do</url-pattern>
     </filter-mapping>
 
     <!--Performance-->

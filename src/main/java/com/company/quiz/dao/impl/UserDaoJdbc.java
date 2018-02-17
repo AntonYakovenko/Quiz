@@ -35,15 +35,18 @@ public class UserDaoJdbc implements UserDao {
             stmt = conn.prepareStatement(SELECT_USER_BY_LOGIN);
             stmt.setString(1, byLogin);
             rs = stmt.executeQuery();
-            if (!rs.next()) {
-                throw new NoSuchEntityException("No user for login " + byLogin);
+//            if (!rs.next()) {
+//                throw new NoSuchEntityException("No user for login " + byLogin);
+//            }
+            User user = null;
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setLogin(rs.getString("login"));
+                user.setName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
             }
-            User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setLogin(rs.getString("login"));
-            user.setName(rs.getString("name"));
-            user.setPassword(rs.getString("password"));
-            user.setEmail(rs.getString("email"));
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,15 +64,18 @@ public class UserDaoJdbc implements UserDao {
             stmt = conn.prepareStatement(SELECT_USER_BY_EMAIL);
             stmt.setString(1, byEmail);
             rs = stmt.executeQuery();
-            if (!rs.next()) {
-                throw new NoSuchEntityException("No user for email " + byEmail);
+//            if (!rs.next()) {
+//                throw new NoSuchEntityException("No user for email " + byEmail);
+//            }
+            User user = null;
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setLogin(rs.getString("login"));
+                user.setName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
             }
-            User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setLogin(rs.getString("login"));
-            user.setName(rs.getString("name"));
-            user.setPassword(rs.getString("password"));
-            user.setEmail(rs.getString("email"));
             return user;
         } catch (SQLException e) {
             throw new DaoSystemException();
@@ -92,8 +98,10 @@ public class UserDaoJdbc implements UserDao {
             stmt.setString(2, user.getName());
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getEmail());
+            stmt.executeUpdate();
             return selectByLogin(user.getLogin());
         } catch (SQLException | NoSuchEntityException e) {
+            e.printStackTrace();
             throw new DaoSystemException("Some JDBC error");
         }
     }
