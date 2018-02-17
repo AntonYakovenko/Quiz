@@ -20,6 +20,7 @@
 
 <hr>
 <a href="quiz.do?id=${quiz}">All questions</a>
+<p><a href="logout.do?redirectTo=question.do!id*${question.id}@quizId*${quiz}">LOGOUT</a></p>
 
 </body>
 </html>

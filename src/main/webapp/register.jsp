@@ -17,16 +17,20 @@
 <h2 class="header">Register new User</h2>
 <form action="register" method="post" enctype="application/x-www-form-urlencoded">
     <label for="login">Login:</label>
-    <br><input name="login" id="login" type="text" value="${login}"/> ${errorMap.login}
+    <br><input name="login" id="login" type="text" value="${login}"
+               placeholder="Enter login..."/> ${errorMap.login}
 
     <br><label for="name">Name:</label>
-    <br><input name="name" id="name" type="text" value="${name}"/> ${errorMap.name}
+    <br><input name="name" id="name" type="text" value="${name}"
+               placeholder="Enter name..."/> ${errorMap.name}
 
     <br><label for="password">Password:</label>
-    <br><input name="password" id="password" type="password" value="${password}"/> ${errorMap.password}
+    <br><input name="password" id="password" type="password" value="${password}"
+               placeholder="Enter password..."/> ${errorMap.password}
 
     <br><label for="email">Email:</label>
-    <br><input name="email" id="email" type="text" value="${email}"/> ${errorMap.email}
+    <br><input name="email" id="email" type="text" value="${email}"
+               placeholder="Enter email..."/> ${errorMap.email}
 
     <br><br><input type="submit"/>
 </form>

@@ -7,12 +7,13 @@
     <title>AllQuizzes</title>
 </head>
 <body>
-    <h2 class="header">QuizAll page</h2>
-    <p>Hello, ${user.login}</p>
-    <ul>
-        <c:forEach var="quiz" items="${quizzesList}">
-            <li><a href="quiz.do?id=${quiz.id}">${quiz.name}</a></li>
-        </c:forEach>
-    </ul>
+<h2 class="header">QuizAll page</h2>
+<p>Hello, ${user.login}</p>
+<ul>
+    <c:forEach var="quiz" items="${quizzesList}">
+        <li><a href="quiz.do?id=${quiz.id}">${quiz.name}</a></li>
+    </c:forEach>
+</ul>
+<p><a href="logout.do?redirectTo=quizAll.do">LOGOUT</a></p>
 </body>
 </html>

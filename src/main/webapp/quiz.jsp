@@ -10,13 +10,8 @@
     <%--<%@ include file="WEB-INF/jspf/cssinclude.jspf"%>--%>
 </head>
 <body>
-<c:if test="${sessionScope.user eq null}">
-    <br/><a href="login.do?redirectTo=quiz.do!id*${quiz.id}">LOGIN</a>
-</c:if>
-<br/><a href="logout.do?redirectTo=quiz.do!id*${quiz.id}">LOGOUT</a>
-<br/>Login: ${user.login}
-<%--<br/>Name: ${user.name}--%>
-<hr>
+<p>Login: ${user.login}</p>
+<p>Name: ${user.name}</p>
 
 <h2 class="header"><span style="text-decoration: underline;">Quiz</span>: ${quiz.name}</h2>
 <ul>
@@ -35,13 +30,12 @@
     </li>
 </ul>
 
-<hr>
 <a href="quizAll.do">All quizzes</a>
 
-<hr> <%--Add quiz to bucket--%>
-<a href="./quizAddToBucket.do?id=${quiz.id}">Add this quiz to bucket</a>
+<%--Add quiz to bucket--%>
+<p><a href="./quizAddToBucket.do?id=${quiz.id}">Add this quiz to bucket</a></p>
 
-<hr> <%--Show quiz bucket--%>
+<%--Show quiz bucket--%>
 <h2 class="header">Quizzes in bucket</h2>
 <ul>
     <c:forEach var="quizInBucket" items="${quizzesInBucket}">
@@ -49,6 +43,6 @@
         href="./quizRemoveFromBucket.do?id=${quizInBucket.id}&redirectToId=${redirectToQuizId}">X</a>)</li>
     </c:forEach>
 </ul>
-
+<p><a href="logout.do?redirectTo=quiz.do!id*${quiz.id}">LOGOUT</a></p>
 </body>
 </html>
