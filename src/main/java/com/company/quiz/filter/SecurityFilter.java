@@ -1,5 +1,6 @@
 package com.company.quiz.filter;
 
+import com.company.inject.DependencyInjectionFilter;
 import org.apache.log4j.Logger;
 
 import javax.servlet.Filter;
@@ -14,7 +15,7 @@ import static com.company.quiz.controller.SessionAttributes.USER;
 import static com.company.quiz.filter.security.UrlCodec.encode;
 import static com.company.util.ClassName.getCurrentClassName;
 
-public class SecurityFilter extends BaseFilter implements Filter {
+public class SecurityFilter extends DependencyInjectionFilter implements Filter {
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 
     @Override

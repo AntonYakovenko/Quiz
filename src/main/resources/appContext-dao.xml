@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="db.properties"/>
+    </bean>
+    <!--TransactionManager, DataSource and other system classes-->
+    <!--<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">-->
+        <!--<property name="driverClassName" value="${db.driverClassName}"/>-->
+        <!--<property name="jdbcUrl" value="${db.url}"/>-->
+        <!--<property name="username" value="${db.username}"/>-->
+        <!--<property name="password" value="${db.password}"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; HikariCP configuration &ndash;&gt;-->
+    <!--<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">-->
+        <!--<constructor-arg ref="hikariConfig" />-->
+    <!--</bean>-->
+
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:schema"/>
+        <jdbc:script location="classpath:test-data"/>
+    </jdbc:embedded-database>
+
+    <bean id="txManager" class="com.company.quiz.dao.tx.TransactionManagerImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <!--DAO-->
-    <bean id="quizDao" class="com.company.quiz.dao.impl.QuizDaoMock" scope="prototype"/>
+    <bean id="userDao" class="com.company.quiz.dao.impl.UserDaoJdbc" scope="prototype">
+        <property name="dataSource" ref="txManager"/>
+    </bean>
+    <bean id="quizDao" class="com.company.quiz.dao.impl.QuizDaoMock" scope="prototype">
+        <property name="dataSource" ref="txManager"/>
+    </bean>
     <bean id="questionDao" class="com.company.quiz.dao.impl.QuestionDaoMock" scope="prototype"/>
+
 </beans>

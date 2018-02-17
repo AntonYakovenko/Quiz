@@ -1,11 +1,11 @@
 package com.company.quiz.controller;
 
+import com.company.inject.DependencyInjectionServlet;
+import com.company.inject.Inject;
 import com.company.quiz.dao.QuizDao;
 import com.company.quiz.dao.exception.DaoSystemException;
 import com.company.quiz.dao.exception.NoSuchEntityException;
 import com.company.quiz.entity.Quiz;
-import com.company.quiz.inject.DependencyInjectionServlet;
-import com.company.quiz.inject.Inject;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ import static com.company.util.ClassName.getCurrentClassName;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.unmodifiableList;
 
-public class QuizAddToBucketController extends DependencyInjectionServlet{
+public class QuizAddToBucketController extends DependencyInjectionServlet {
     public static final String PARAM_ID = "id";
     public static final String PAGE_ERROR = "quizAll.do";
 

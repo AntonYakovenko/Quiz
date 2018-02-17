@@ -5,7 +5,6 @@
                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <!--CONTROLLERS-->
-
     <!--question-->
     <servlet>
         <servlet-name>QuestionController</servlet-name>
@@ -56,6 +55,7 @@
         <url-pattern>/quizAll.do</url-pattern>
     </servlet-mapping>
 
+    <!--Logout-->
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.company.quiz.controller.LogoutController</servlet-class>
@@ -109,11 +109,19 @@
         <location>/show-error.jsp</location>
     </error-page>
 
+    <!--LISTENERS-->
+    <listener>
+        <listener-class>com.company.inject.AppContext</listener-class>
+    </listener>
 
     <!--APPLICATION CONTEXT-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:appContext-dao.xml</param-value>
     </context-param>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 
 </web-app>

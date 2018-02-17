@@ -1,9 +1,10 @@
 package com.company.quiz.controller;
 
+import com.company.inject.DependencyInjectionServlet;
+import com.company.inject.Inject;
 import com.company.quiz.dao.QuizDao;
+import com.company.quiz.dao.tx.TransactionManager;
 import com.company.quiz.entity.Quiz;
-import com.company.quiz.inject.DependencyInjectionServlet;
-import com.company.quiz.inject.Inject;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -15,15 +16,17 @@ import java.util.Arrays;
 
 import static com.company.util.ClassName.getCurrentClassName;
 
-public class QuizController extends DependencyInjectionServlet{
+public class QuizController extends DependencyInjectionServlet {
     public static final String PARAM_ID = "id";
-    public static final String ATTRIBUTE_QUIZ = "quiz";
+    public static final String ATTRIBUTE_MODEL_YO_VIEW = "quiz";
     public static final String ATTRIBUTE_REDIRECT_TO_QUIZ_ID = "redirectToQuizId";
     public static final String PAGE_OK = "quiz.jsp";
     public static final String PAGE_ERROR = "show-error.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 
+    @Inject("txManager")
+    private TransactionManager txManager;
     @Inject("quizDao")
     private QuizDao quizDao;
 
@@ -42,10 +45,11 @@ public class QuizController extends DependencyInjectionServlet{
         if (idStr != null && !idStr.equals("")) {
             try {
                 final Integer id = Integer.valueOf(idStr);
-                Quiz quiz = quizDao.selectById(id);
-                req.setAttribute(ATTRIBUTE_QUIZ, quiz);
+//                Quiz quiz = quizDao.selectById(id);
+                Quiz model = txManager.call(() -> quizDao.selectById(id));
+                req.setAttribute(ATTRIBUTE_MODEL_YO_VIEW, model);
                 req.setAttribute(ATTRIBUTE_REDIRECT_TO_QUIZ_ID, idStr);
-                logger.debug("set attribute '" + ATTRIBUTE_QUIZ + "' to " + quiz);
+                logger.debug("set attribute '" + ATTRIBUTE_MODEL_YO_VIEW + "' to " + model);
                 logger.debug("set attribute '" + ATTRIBUTE_REDIRECT_TO_QUIZ_ID + "' to " + idStr);
                 // OK
                 req.getRequestDispatcher(PAGE_OK).forward(req, resp);

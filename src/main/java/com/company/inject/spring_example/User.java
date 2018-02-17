@@ -1,6 +1,4 @@
-package com.company.quiz.inject.spring_example;
-
-import com.company.quiz.inject.spring_example.Address;
+package com.company.inject.spring_example;
 
 public class User {
     private Address address;

@@ -1,5 +1,6 @@
 package com.company.quiz.filter;
 
+import com.company.inject.DependencyInjectionFilter;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -9,7 +10,7 @@ import java.io.IOException;
 
 import static com.company.util.ClassName.getCurrentClassName;
 
-public class PerformanceFilter extends BaseFilter implements Filter {
+public class PerformanceFilter extends DependencyInjectionFilter implements Filter {
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 
     @Override

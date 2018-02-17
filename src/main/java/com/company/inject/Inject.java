@@ -1,4 +1,4 @@
-package com.company.quiz.inject;
+package com.company.inject;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

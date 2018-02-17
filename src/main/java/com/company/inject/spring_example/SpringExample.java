@@ -1,9 +1,7 @@
-package com.company.quiz.inject.spring_example;
+package com.company.inject.spring_example;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.Map;
 
 public class SpringExample {
     public static void main(String[] args) {

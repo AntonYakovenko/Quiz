@@ -1,9 +1,9 @@
 package com.company.quiz.controller;
 
+import com.company.inject.DependencyInjectionServlet;
+import com.company.inject.Inject;
 import com.company.quiz.dao.QuestionDao;
 import com.company.quiz.entity.Question;
-import com.company.quiz.inject.DependencyInjectionServlet;
-import com.company.quiz.inject.Inject;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

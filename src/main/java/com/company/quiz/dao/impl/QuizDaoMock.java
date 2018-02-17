@@ -9,12 +9,16 @@ import com.company.quiz.entity.Question;
 import com.company.quiz.entity.Quiz;
 import com.company.quiz.entity.Theme;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
 import static java.util.Arrays.asList;
 
 public class QuizDaoMock implements QuizDao {
     private Map<Integer, Quiz> memory = new HashMap<>();
+    private DataSource dataSource;
 
     public QuizDaoMock() throws DaoSystemException, NoSuchEntityException {
         QuestionDao questions = new QuestionDaoMock();
@@ -27,6 +31,10 @@ public class QuizDaoMock implements QuizDao {
         } catch (DaoSystemException | NoSuchEntityException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     /**

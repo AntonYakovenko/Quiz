@@ -1,4 +1,4 @@
-package com.company.quiz.inject;
+package com.company.inject;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;

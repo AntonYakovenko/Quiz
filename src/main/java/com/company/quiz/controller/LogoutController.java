@@ -1,6 +1,6 @@
 package com.company.quiz.controller;
 
-import com.company.quiz.inject.DependencyInjectionServlet;
+import com.company.inject.DependencyInjectionServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

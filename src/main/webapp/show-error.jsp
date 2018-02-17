@@ -15,7 +15,8 @@
 </head>
 
 <body>
-<p>Exception stack trace:<% exception.printStackTrace(response.getWriter()); %></p>
+<p>Exception is <%=exception%></p>
+<%--<p>Exception stack trace:<% exception.printStackTrace(response.getWriter()); %></p>--%>
 </body>
 
 </html>

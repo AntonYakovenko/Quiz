@@ -1,4 +1,4 @@
-package com.company.quiz.inject.spring_example;
+package com.company.inject.spring_example;
 
 public class Address {
     private String street;
