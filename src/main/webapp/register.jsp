@@ -6,6 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale eq null ? 'en_US' : sessionScope.locale}"/>
+<c:if test="${sessionScope.locale eq null}">
+    <c:set var="locale" value="en_EN" scope="session"/>
+</c:if>
+<fmt:setBundle basename="lang" var="bundle"/>
 <html>
 <head>
     <title>Register</title>
@@ -14,26 +21,26 @@
 </head>
 
 <body>
-<h2 class="header">Register new User</h2>
+<h2 class="header"><fmt:message key="Registration" bundle="${bundle}"/></h2>
 <form action="register" method="post" enctype="application/x-www-form-urlencoded">
-    <label for="login">Login:</label>
-    <br><input name="login" id="login" type="text" value="${login}"
-               placeholder="Enter login..."/> ${errorMap.login}
+    <label for="login"><fmt:message key="Login" bundle="${bundle}"/>:</label>
+    <br><input name="login" id="login" type="text" value="${login}" placeholder
+        ="<fmt:message key="Enter_login" bundle="${bundle}"/>..."/> ${errorMap.login}
 
-    <br><label for="name">Name:</label>
-    <br><input name="name" id="name" type="text" value="${name}"
-               placeholder="Enter name..."/> ${errorMap.name}
+    <br><label for="name"><fmt:message key="Name" bundle="${bundle}"/>:</label>
+    <br><input name="name" id="name" type="text" value="${name}" placeholder
+        ="<fmt:message key="Enter_name" bundle="${bundle}"/>..."/> ${errorMap.name}
 
-    <br><label for="password">Password:</label>
-    <br><input name="password" id="password" type="password" value="${password}"
-               placeholder="Enter password..."/> ${errorMap.password}
+    <br><label for="password"><fmt:message key="Password" bundle="${bundle}"/>:</label>
+    <br><input name="password" id="password" type="password" value="${password}" placeholder
+        ="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/> ${errorMap.password}
 
-    <br><label for="email">Email:</label>
-    <br><input name="email" id="email" type="text" value="${email}"
-               placeholder="Enter email..."/> ${errorMap.email}
+    <br><label for="email"><fmt:message key="Email" bundle="${bundle}"/>:</label>
+    <br><input name="email" id="email" type="text" value="${email}" placeholder
+        ="<fmt:message key="Enter_email" bundle="${bundle}"/>..."/> ${errorMap.email}
 
-    <br><br><input type="submit"/>
+    <br><br><input type="submit" value="<fmt:message key="submit" bundle="${bundle}"/>"/>
 </form>
-
+<p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>
 </body>
 </html>

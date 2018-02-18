@@ -11,7 +11,7 @@ import java.io.IOException;
 import static com.company.quiz.controller.SessionAttributes.LOCALE;
 
 public class LanguageController extends DependencyInjectionServlet {
-    public static final String PAGE_TEST = "test-test.jsp";
+    public static final String BASE_PAGE = "index.jsp";
     public static final String PARAM_LANGUAGE = "language";
 
     @Override
@@ -19,6 +19,6 @@ public class LanguageController extends DependencyInjectionServlet {
         HttpSession session = request.getSession();
         String language = request.getParameter(PARAM_LANGUAGE);
         session.setAttribute(LOCALE, language);
-        response.sendRedirect(request.getParameter("address"));
+        response.sendRedirect(BASE_PAGE);
     }
 }

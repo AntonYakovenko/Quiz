@@ -35,7 +35,7 @@ public class AppContext implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-//        ((ClassPathXmlApplicationContext)appCtx).close();
+        ((ClassPathXmlApplicationContext)appCtx).close();
         System.out.println("ServletContextListener destroyed");
     }
 }

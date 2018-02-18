@@ -13,15 +13,13 @@
 <body>
 <div style="text-align: center;">
     <form action="/language" method="post">
-        <p><fmt:message key="button" bundle="${bundle}"/></p>
         <fmt:message key="language" bundle="${bundle}"/>:
-        <select name="language"/>">
-        <option value="en_US">english</option>
-        <option value="uk_UA">українська</option>
-        <option value="ru_RU">русский</option>
+        <select name="language">
+            <option value="en_US">english</option>
+            <option value="uk_UA">українська</option>
+            <option value="ru_RU">русский</option>
         </select>
-        <input type="hidden" name="address" value="${pageContext.request.requestURL}"/>
-        <input type="submit" name="setLanguage" value="<fmt:message key="select" bundle="${bundle}"/>"/>
+        <input type="submit" value="<fmt:message key="select" bundle="${bundle}"/>"/>
     </form>
 </div>
 </body>

@@ -84,8 +84,6 @@ public class LoginController extends DependencyInjectionServlet {
                 return;
             }
         }
-        req.setAttribute("login", login);
-        req.setAttribute("password", password);
         req.setAttribute("errorMap", errorMap);
         req.getRequestDispatcher(PAGE_WRONG_AUTHORIZATION).forward(req, resp);
         logger.debug("PAGE_WRONG_AUTHORIZATION: requestDispatcher.forward(...) to " + PAGE_WRONG_AUTHORIZATION);

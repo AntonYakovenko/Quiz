@@ -98,10 +98,6 @@ public class RegisterNewUserController extends DependencyInjectionServlet {
                 throw new ServletException(e);
             }
         }
-        req.setAttribute("login", login);
-        req.setAttribute("name", name);
-        req.setAttribute("password", password);
-        req.setAttribute("email", email);
         req.setAttribute("errorMap", errorMap);
 
         req.getRequestDispatcher(PAGE_MORE_INFO).forward(req, resp);
