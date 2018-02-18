@@ -84,10 +84,7 @@ public class RegisterNewUserController extends DependencyInjectionServlet {
                     }
                     logger.debug("errorMap is: " + errorMap);
                     logger.debug("USER FOR REGISTRATION: user = '" + tempUser + "'");
-                    if (errorMap.isEmpty()) {
-                        return userDao.insertNew(tempUser);
-                    }
-                    return tempUser;
+                    return errorMap.isEmpty() ? userDao.insertNew(tempUser) : tempUser;
                 });
 
                 if (errorMap.isEmpty()) {

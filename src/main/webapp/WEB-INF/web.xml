@@ -86,6 +86,16 @@
         <url-pattern>/logout.do</url-pattern>
     </servlet-mapping>
 
+    <!--Language-->
+    <servlet>
+        <servlet-name>LanguageController</servlet-name>
+        <servlet-class>com.company.quiz.controller.LanguageController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LanguageController</servlet-name>
+        <url-pattern>/language</url-pattern>
+    </servlet-mapping>
+
     <!--FILTERS-->
 
     <!--Security-->
