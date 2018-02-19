@@ -25,19 +25,19 @@
 <form action="register" method="post" enctype="application/x-www-form-urlencoded">
     <label for="login"><fmt:message key="Login" bundle="${bundle}"/>:</label>
     <br><input name="login" id="login" type="text" value="${login}" placeholder
-        ="<fmt:message key="Enter_login" bundle="${bundle}"/>..."/> ${errorMap.login}
+        ="<fmt:message key="Enter_login" bundle="${bundle}"/>..."/><span class="error"> ${errorMap.login}</span>
 
     <br><label for="name"><fmt:message key="Name" bundle="${bundle}"/>:</label>
     <br><input name="name" id="name" type="text" value="${name}" placeholder
-        ="<fmt:message key="Enter_name" bundle="${bundle}"/>..."/> ${errorMap.name}
+        ="<fmt:message key="Enter_name" bundle="${bundle}"/>..."/><span class="error"> ${errorMap.name}</span>
 
     <br><label for="password"><fmt:message key="Password" bundle="${bundle}"/>:</label>
     <br><input name="password" id="password" type="password" value="${password}" placeholder
-        ="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/> ${errorMap.password}
+        ="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/> <span class="error"> ${errorMap.password}</span>
 
     <br><label for="email"><fmt:message key="Email" bundle="${bundle}"/>:</label>
     <br><input name="email" id="email" type="text" value="${email}" placeholder
-        ="<fmt:message key="Enter_email" bundle="${bundle}"/>..."/> ${errorMap.email}
+        ="<fmt:message key="Enter_email" bundle="${bundle}"/>..."/> <span class="error"> ${errorMap.email}</span>
 
     <br><br><input type="submit" value="<fmt:message key="submit" bundle="${bundle}"/>"/>
 </form>

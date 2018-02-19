@@ -9,6 +9,5 @@ public class SpringExample {
         User user0 = (User) appCtx.getBean("user");
         User user1 = (User) appCtx.getBean("user");
         System.out.println(user0 == user1);
-        System.out.println(1 / 1);
     }
 }

@@ -25,10 +25,10 @@
       enctype="application/x-www-form-urlencoded">
     <label for="login"><fmt:message key="Login" bundle="${bundle}"/>:</label>
     <br><input name="login" id="login" type="text" placeholder
-        ="<fmt:message key="Enter_login" bundle="${bundle}"/>..."/> ${errorMap.login}
+        ="<fmt:message key="Enter_login" bundle="${bundle}"/>..."/> <span class="error"> ${errorMap.login}</span>
     <br><label for="password"><fmt:message key="Password" bundle="${bundle}"/>:</label>
     <br><input name="password" id="password" type="password" placeholder
-        ="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/> ${errorMap.password}
+        ="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/> <span class="error"> ${errorMap.password}</span>
     <br><br><input type="submit" value="<fmt:message key="submit" bundle="${bundle}"/>"/>
 </form>
 <p><a href="register"><fmt:message key="Create_new_account" bundle="${bundle}"/></a></p>
