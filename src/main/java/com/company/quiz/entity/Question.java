@@ -8,17 +8,20 @@ public class Question {
     private String description;
     private List<Answer> answers;
     private String explanation;
+    private int quizId;
+
     private List<Theme> themes; // todo
 
     public Question() {}
 
-    public Question(int id, String name, String description, List<Answer> answers, String explanation, List<Theme> themes) {
+    public Question(int id, String name, String description, List<Answer> answers, String explanation, List<Theme> themes, int quizId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.answers = answers;
         this.explanation = explanation;
         this.themes = themes;
+        this.quizId = quizId;
     }
 
     public int getId() {
@@ -61,6 +64,14 @@ public class Question {
         this.explanation = explanation;
     }
 
+    public int getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
+
     public List<Theme> getThemes() {
         return themes;
     }
@@ -77,6 +88,7 @@ public class Question {
                 ", description='" + description + '\'' +
                 ", answers=" + answers +
                 ", explanation='" + explanation + '\'' +
+                ", quizId=" + quizId +
                 ", themes=" + themes +
                 '}';
     }

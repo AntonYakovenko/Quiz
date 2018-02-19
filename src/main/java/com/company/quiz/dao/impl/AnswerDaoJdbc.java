@@ -40,6 +40,7 @@ public class AnswerDaoJdbc implements AnswerDao {
                 answer.setAnswer(rs.getString("answer"));
                 answer.setCorrect(rs.getBoolean("correct"));
                 answer.setExplanation(rs.getString("explanation"));
+                answer.setQuestionId(rs.getInt("questionId"));
                 answers.add(answer);
             }
             return answers;

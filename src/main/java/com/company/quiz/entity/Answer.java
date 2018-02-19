@@ -5,14 +5,16 @@ public class Answer {
     private String answer;
     private boolean correct;
     private String explanation;
+    private int questionId;
 
     public Answer() {}
 
-    public Answer(int id, String answer, boolean correct, String explanation) {
+    public Answer(int id, String answer, boolean correct, String explanation, int questionId) {
         this.id = id;
         this.answer = answer;
         this.correct = correct;
         this.explanation = explanation;
+        this.questionId = questionId;
     }
 
     public int getId() {
@@ -47,6 +49,14 @@ public class Answer {
         this.explanation = explanation;
     }
 
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
+
     @Override
     public String toString() {
         return "Answer{" +
@@ -54,6 +64,7 @@ public class Answer {
                 ", answer='" + answer + '\'' +
                 ", correct=" + correct +
                 ", explanation='" + explanation + '\'' +
+                ", questionId=" + questionId +
                 '}';
     }
 }

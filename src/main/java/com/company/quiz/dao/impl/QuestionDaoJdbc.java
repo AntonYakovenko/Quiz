@@ -39,6 +39,7 @@ public class QuestionDaoJdbc implements QuestionDao {
                 question.setName(rs.getString("name"));
                 question.setDescription(rs.getString("description"));
                 question.setExplanation(rs.getString("explanation"));
+                question.setQuizId(rs.getInt("quizId"));
 //                question.setAnswers(new AnswerDaoJdbc().selectByQuestionId(currentQuestionId));
             }
             return question;
@@ -63,6 +64,7 @@ public class QuestionDaoJdbc implements QuestionDao {
                 question.setName(rs.getString("name"));
                 question.setDescription(rs.getString("description"));
                 question.setExplanation(rs.getString("explanation"));
+                question.setQuizId(rs.getInt("quizId"));
 //                question.setAnswers(new AnswerDaoJdbc().selectByQuestionId(currentQuestionId));
                 questions.add(question);
             }

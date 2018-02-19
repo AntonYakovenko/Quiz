@@ -33,9 +33,9 @@ public class UserValidatorImpl implements UserValidator {
             errorMap.put("name", "name.length() < 3");
         } else if (name.length() > 10) {
             errorMap.put("name", "name.length() > 10");
-        } else if (!name.matches("[0-9]+")) {
+        } /*else if (name.matches("[0-9]+")) {
             errorMap.put("name", "name contains digits");
-        }
+        }*/
     }
 
     private void validatePassword(String password, Map<String, String> errorMap) {

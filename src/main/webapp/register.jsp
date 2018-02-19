@@ -40,6 +40,7 @@
         ="<fmt:message key="Enter_email" bundle="${bundle}"/>..."/> <span class="error"> ${errorMap.email}</span>
 
     <br><br><input type="submit" value="<fmt:message key="submit" bundle="${bundle}"/>"/>
+    <input type="reset" value="reset">
 </form>
 <p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>
 </body>
