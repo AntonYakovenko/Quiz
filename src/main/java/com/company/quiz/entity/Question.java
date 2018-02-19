@@ -1,20 +1,21 @@
 package com.company.quiz.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
-    private final int id;
+    private int id;
     private String name;
-    private String intro;
-    private List<Answer> answers = new ArrayList<>();
+    private String description;
+    private List<Answer> answers;
     private String explanation;
-    private List<Theme> themes = new ArrayList<>(); // todo
+    private List<Theme> themes; // todo
 
-    public Question(int id, String name, String intro, List<Answer> answers, String explanation, List<Theme> themes) {
+    public Question() {}
+
+    public Question(int id, String name, String description, List<Answer> answers, String explanation, List<Theme> themes) {
         this.id = id;
         this.name = name;
-        this.intro = intro;
+        this.description = description;
         this.answers = answers;
         this.explanation = explanation;
         this.themes = themes;
@@ -22,6 +23,10 @@ public class Question {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,12 +37,12 @@ public class Question {
         this.name = name;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Answer> getAnswers() {
@@ -69,7 +74,7 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", intro='" + intro + '\'' +
+                ", description='" + description + '\'' +
                 ", answers=" + answers +
                 ", explanation='" + explanation + '\'' +
                 ", themes=" + themes +

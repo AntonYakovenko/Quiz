@@ -1,10 +1,12 @@
 package com.company.quiz.entity;
 
 public class Answer {
-    private final int id;
+    private int id;
     private String answer;
     private boolean correct;
     private String explanation;
+
+    public Answer() {}
 
     public Answer(int id, String answer, boolean correct, String explanation) {
         this.id = id;
@@ -15,6 +17,10 @@ public class Answer {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAnswer() {

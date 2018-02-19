@@ -8,9 +8,11 @@ import com.company.quiz.entity.Theme;
 import java.util.List;
 
 public interface QuizDao {
-    Quiz selectById(int id) throws DaoSystemException, NoSuchEntityException;
+    Quiz selectInfoById(int byId) throws DaoSystemException;
 
-    List<Quiz> selectAll() throws DaoSystemException;
+    List<Quiz> selectAllSimpleInfo() throws DaoSystemException;
 
-    List<Quiz> selectByTheme(Theme theme) throws DaoSystemException;
+    default List<Quiz> selectByTheme(Theme theme) throws DaoSystemException {
+        throw new UnsupportedOperationException();
+    }
 }

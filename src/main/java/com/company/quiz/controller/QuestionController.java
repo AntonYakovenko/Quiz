@@ -3,6 +3,7 @@ package com.company.quiz.controller;
 import com.company.inject.DependencyInjectionServlet;
 import com.company.inject.Inject;
 import com.company.quiz.dao.QuestionDao;
+import com.company.quiz.dao.tx.TransactionManager;
 import com.company.quiz.entity.Question;
 import org.apache.log4j.Logger;
 
@@ -25,6 +26,8 @@ public class QuestionController extends DependencyInjectionServlet {
 
     @Inject("questionDao")
     private QuestionDao questionDao;
+    @Inject("txManager")
+    private TransactionManager txManager;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +46,14 @@ public class QuestionController extends DependencyInjectionServlet {
             try {
                 final Integer id = Integer.valueOf(idQuestion);
                 final Integer redirectId = Integer.valueOf(idQuiz);
-                Question question = questionDao.selectById(id);
+//                Question question = questionDao.selectById(id);
+                Question question;
+                question = txManager.call(() -> {
+                    if (questionDao.selectInfoById(id) == null) {
+                        logger.warn("No question for such id");
+                    }
+                    return questionDao.selectInfoById(id);
+                });
                 req.setAttribute(ATTRIBUTE_QUESTION, question);
                 req.setAttribute(ATTRIBUTE_QUIZ, redirectId);
                 logger.debug("set attribute '" + ATTRIBUTE_QUESTION + "' to " + question);

@@ -20,7 +20,7 @@
 
 <h2 class="header"><span style="text-decoration: underline;"><fmt:message key="Quiz" bundle="${bundle}"/></span>: ${quiz.name}</h2>
 <ul>
-    <li><fmt:message key="Description" bundle="${bundle}"/>: ${quiz.intro}</li>
+    <li><fmt:message key="Description" bundle="${bundle}"/>: ${quiz.description}</li>
     <li><fmt:message key="Questions" bundle="${bundle}"/>:
         <ul>
             <c:forEach var="question" items="${quiz.questions}">

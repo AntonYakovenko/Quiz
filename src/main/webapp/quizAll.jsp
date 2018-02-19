@@ -16,7 +16,7 @@
 <h2 class="header"><fmt:message key="Quizzes_list" bundle="${bundle}"/></h2>
 <p><fmt:message key="Hello" bundle="${bundle}"/>, ${user.login}</p>
 <ul>
-    <c:forEach var="quiz" items="${quizzesList}">
+    <c:forEach var="quiz" items="${quizzesSimpleInfo}">
         <li><a href="quiz.do?id=${quiz.id}">${quiz.name}</a></li>
     </c:forEach>
 </ul>

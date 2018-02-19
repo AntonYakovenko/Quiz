@@ -37,10 +37,15 @@
     <bean id="userDao" class="com.company.quiz.dao.impl.UserDaoJdbc" scope="prototype">
         <property name="dataSource" ref="txManager"/>
     </bean>
-    <bean id="quizDao" class="com.company.quiz.dao.impl.QuizDaoMock" scope="prototype">
+    <bean id="quizDao" class="com.company.quiz.dao.impl.QuizDaoJdbc" scope="prototype">
         <property name="dataSource" ref="txManager"/>
     </bean>
-    <bean id="questionDao" class="com.company.quiz.dao.impl.QuestionDaoMock" scope="prototype"/>
+    <bean id="questionDao" class="com.company.quiz.dao.impl.QuestionDaoJdbc" scope="prototype">
+        <property name="dataSource" ref="txManager"/>
+    </bean>
+    <bean id="answerDao" class="com.company.quiz.dao.impl.AnswerDaoJdbc" scope="prototype">
+        <property name="dataSource" ref="txManager"/>
+    </bean>
 
     <!--VALIDATOR-->
     <bean id="userValidator" class="com.company.quiz.validator.UserValidatorImpl"/>

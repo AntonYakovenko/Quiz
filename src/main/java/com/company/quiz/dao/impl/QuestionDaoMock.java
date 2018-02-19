@@ -10,7 +10,7 @@ import java.util.*;
 
 import static java.util.Arrays.asList;
 
-public class QuestionDaoMock implements QuestionDao{
+public class QuestionDaoMock implements QuestionDao {
     private Map<Integer, Question> memory = new HashMap<>();
 
     public QuestionDaoMock() throws DaoSystemException, NoSuchEntityException {
@@ -36,15 +36,17 @@ public class QuestionDaoMock implements QuestionDao{
      * Never returns null
      */
     @Override
-    public Question selectById(int id) throws DaoSystemException, NoSuchEntityException {
+    public Question selectInfoById(int id) throws DaoSystemException {
         if (!memory.containsKey(id)) {
-            throw new NoSuchEntityException("No Question for id == '" + id + "'");
+//            throw new NoSuchEntityException("No Question for id == '" + id + "'");
+            throw new UnsupportedOperationException();
         }
         return memory.get(id);
     }
 
     @Override
-    public List<Question> selectAll() throws DaoSystemException {
-        return new ArrayList<>(memory.values());
+    public List<Question> selectInfoByQuizId(int id) throws DaoSystemException {
+//        return new ArrayList<>(memory.values());
+        throw new UnsupportedOperationException();
     }
 }

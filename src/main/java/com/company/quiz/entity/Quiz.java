@@ -1,25 +1,30 @@
 package com.company.quiz.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz {
-    private final int id;
-    private  String name;
-    private String intro;
-    private List<Question> questions = new ArrayList<>();
-    private List<Theme> themes = new ArrayList<>();
+    private int id;
+    private String name;
+    private String description;
+    private List<Question> questions;
+    private List<Theme> themes;
 
-    public Quiz(int id, String name, String intro, List<Question> questions, List<Theme> themes) {
+    public Quiz() {}
+
+    public Quiz(int id, String name, String description, List<Question> questions, List<Theme> themes) {
         this.id = id;
         this.name = name;
-        this.intro = intro;
+        this.description = description;
         this.questions = questions;
         this.themes = themes;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -30,12 +35,12 @@ public class Quiz {
         this.name = name;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Question> getQuestions() {
@@ -63,7 +68,7 @@ public class Quiz {
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (intro != null ? !intro.equals(that.intro) : that.intro != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (questions != null ? !questions.equals(that.questions) : that.questions != null) return false;
         return themes != null ? themes.equals(that.themes) : that.themes == null;
     }
@@ -72,7 +77,7 @@ public class Quiz {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (intro != null ? intro.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (questions != null ? questions.hashCode() : 0);
         result = 31 * result + (themes != null ? themes.hashCode() : 0);
         return result;
@@ -83,7 +88,7 @@ public class Quiz {
         return "Quiz{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", intro='" + intro + '\'' +
+                ", description='" + description + '\'' +
                 ", questions=" + questions +
                 ", themes=" + themes +
                 '}';

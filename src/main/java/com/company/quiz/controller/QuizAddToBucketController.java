@@ -5,6 +5,7 @@ import com.company.inject.Inject;
 import com.company.quiz.dao.QuizDao;
 import com.company.quiz.dao.exception.DaoSystemException;
 import com.company.quiz.dao.exception.NoSuchEntityException;
+import com.company.quiz.dao.tx.TransactionManager;
 import com.company.quiz.entity.Quiz;
 import org.apache.log4j.Logger;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,8 @@ public class QuizAddToBucketController extends DependencyInjectionServlet {
 
     @Inject("quizDao")
     private QuizDao quizDao;
+    @Inject("txManager")
+    private TransactionManager txManager;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,8 +40,17 @@ public class QuizAddToBucketController extends DependencyInjectionServlet {
         if (idStr != null) {
             try {
                 Integer id = Integer.valueOf(idStr);
-                Quiz quiz = quizDao.selectById(id);
-
+                Quiz quiz = null;
+                try {
+                    quiz = txManager.call(() -> {
+                        if (quizDao.selectInfoById(id) == null) {
+                            logger.debug("No quiz for such id");
+                        }
+                        return quizDao.selectInfoById(id);
+                    });
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 HttpSession session = request.getSession(true);
                 List<Quiz> oldBucket = (List<Quiz>) session.getAttribute(QUIZZES_IN_BUCKET);
                 if (oldBucket == null) {
@@ -66,7 +79,7 @@ public class QuizAddToBucketController extends DependencyInjectionServlet {
                 response.sendRedirect(newLocation);
                 logger.debug("PAGE_OK: response.sendRedirect(...) to " + newLocation);
                 return;
-            } catch (DaoSystemException | NoSuchEntityException e) {
+            } catch (DaoSystemException e) {
                 logger.warn(e);
                 e.printStackTrace();
             }

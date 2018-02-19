@@ -18,7 +18,7 @@
 <ul>
     <li>Id: ${question.id}</li>
     <li><fmt:message key="Name" bundle="${bundle}"/>: ${question.name}</li>
-    <li><fmt:message key="Description" bundle="${bundle}"/>: ${question.intro}</li>
+    <li><fmt:message key="Description" bundle="${bundle}"/>: ${question.description}</li>
     <li><fmt:message key="Answers" bundle="${bundle}"/>: ${question.answers}</li>
     <li><fmt:message key="Explanation" bundle="${bundle}"/>: ${question.explanation}</li>
 </ul>

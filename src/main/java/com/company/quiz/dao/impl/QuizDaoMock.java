@@ -24,11 +24,11 @@ public class QuizDaoMock implements QuizDao {
         QuestionDao questions = new QuestionDaoMock();
         ThemeDao themes = new ThemeDaoMock();
         try {
-            this.memory.put(1, new Quiz(1, "Loops quiz", "Some questions", asList(questions.selectById(1), questions.selectById(2)), null));
-            this.memory.put(2, new Quiz(2, "Recursion quiz", "Some questions", asList(questions.selectById(3), questions.selectById(4)), null));
-            this.memory.put(3, new Quiz(3, "Exceptions control-flow quiz", "Some questions", asList(questions.selectById(5), questions.selectById(6)), null));
-            this.memory.put(4, new Quiz(4, "Exceptions checked/unchecked quiz", "Some questions", asList(questions.selectById(7)), null));
-        } catch (DaoSystemException | NoSuchEntityException e) {
+            this.memory.put(1, new Quiz(1, "Loops quiz", "Some questions", asList(questions.selectInfoById(1), questions.selectInfoById(2)), null));
+            this.memory.put(2, new Quiz(2, "Recursion quiz", "Some questions", asList(questions.selectInfoById(3), questions.selectInfoById(4)), null));
+            this.memory.put(3, new Quiz(3, "Exceptions control-flow quiz", "Some questions", asList(questions.selectInfoById(5), questions.selectInfoById(6)), null));
+            this.memory.put(4, new Quiz(4, "Exceptions checked/unchecked quiz", "Some questions", asList(questions.selectInfoById(7)), null));
+        } catch (DaoSystemException e) {
             e.printStackTrace();
         }
     }
@@ -41,9 +41,10 @@ public class QuizDaoMock implements QuizDao {
      * Never returns null
      */
     @Override
-    public Quiz selectById(int id) throws DaoSystemException, NoSuchEntityException {
+    public Quiz selectInfoById(int id) throws DaoSystemException{
         if (!memory.containsKey(id)) {
-            throw new NoSuchEntityException("No Quiz for id == '" + id + "'");
+//            throw new NoSuchEntityException("No Quiz for id == '" + id + "'");
+            throw new UnsupportedOperationException();
         }
         return memory.get(id);
     }
@@ -60,7 +61,7 @@ public class QuizDaoMock implements QuizDao {
     }
 
     @Override
-    public List<Quiz> selectAll() throws DaoSystemException {
+    public List<Quiz> selectAllSimpleInfo() throws DaoSystemException {
         return new ArrayList<Quiz>(memory.values());
     }
 }

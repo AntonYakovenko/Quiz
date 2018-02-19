@@ -7,7 +7,7 @@ import com.company.quiz.entity.Question;
 import java.util.List;
 
 public interface QuestionDao {
-    Question selectById(int id) throws DaoSystemException, NoSuchEntityException;
+    Question selectInfoById(int byId) throws DaoSystemException;
 
-    List<Question> selectAll() throws DaoSystemException;
+    List<Question> selectInfoByQuizId(int byQuizId) throws DaoSystemException;
 }

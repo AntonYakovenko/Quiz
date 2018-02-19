@@ -27,14 +27,11 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public User selectByLogin(String byLogin) throws DaoSystemException, NoSuchEntityException {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
         try {
-            conn = dataSource.getConnection();
-            stmt = conn.prepareStatement(SELECT_USER_BY_LOGIN);
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(SELECT_USER_BY_LOGIN);
             stmt.setString(1, byLogin);
-            rs = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 //            if (!rs.next()) {
 //                throw new NoSuchEntityException("No user for login " + byLogin);
 //            }
@@ -56,14 +53,11 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public User selectByEmail(String byEmail) throws DaoSystemException, NoSuchEntityException {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
         try {
-            conn = dataSource.getConnection();
-            stmt = conn.prepareStatement(SELECT_USER_BY_EMAIL);
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(SELECT_USER_BY_EMAIL);
             stmt.setString(1, byEmail);
-            rs = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 //            if (!rs.next()) {
 //                throw new NoSuchEntityException("No user for email " + byEmail);
 //            }
@@ -89,11 +83,9 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public User insertNew(User user) throws DaoSystemException {
-        Connection conn = null;
-        PreparedStatement stmt = null;
         try {
-            conn = dataSource.getConnection();
-            stmt = conn.prepareStatement(INSERT_USER);
+            Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(INSERT_USER);
             stmt.setString(1, user.getLogin());
             stmt.setString(2, user.getName());
             stmt.setString(3, user.getPassword());
