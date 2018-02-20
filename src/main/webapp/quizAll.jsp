@@ -17,7 +17,7 @@
 <p><fmt:message key="Hello" bundle="${bundle}"/>, ${user.login}</p>
 <ul>
     <c:forEach var="quiz" items="${quizzesSimpleInfo}">
-        <li><a href="quiz.do?id=${quiz.id}">${quiz.name}</a></li>
+        <li><a href="quiz.do?id=${quiz.id}">${quiz.name}</a> ${sessionScope.completedQuizzes[quiz.id]}</li>
     </c:forEach>
 </ul>
 <p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>

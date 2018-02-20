@@ -25,7 +25,6 @@ public class QuestionController extends DependencyInjectionServlet {
     public static final String ATTRIBUTE_QUESTION = "question";
     public static final String ATTRIBUTE_IS_LAST = "isLast";
     public static final String ATTRIBUTE_ANSWERS = "answers";
-    //    public static final String ATTRIBUTE_CURRENT_QUESTION_ID = "currId";
     public static final String ATTRIBUTE_NEXT_QUESTION_ID = "nextQuestionId";
     public static final String PAGE_OK = "question.jsp";
     public static final String PAGE_ERROR = "show-error.jsp";
@@ -54,15 +53,20 @@ public class QuestionController extends DependencyInjectionServlet {
         String answer = req.getParameter(PARAM_ANSWER);
         HttpSession session = req.getSession();
         List<Integer> questionsIdsList = (List<Integer>) session.getAttribute(QUESTIONS_IDS_OF_CURRENT_QUIZ);
-        Map<Integer, Boolean> answersMap = new HashMap<>();
-
+        Map<Integer, Boolean> answersMap = (Map<Integer, Boolean>) session.getAttribute(ANSWERS_MAP);
+        if (answersMap == null) {
+            answersMap = new HashMap<>();
+        }
         try {
             final Integer id = Integer.valueOf(idQuestion);
 
             // Handle last answer
             if (id == -1) {
                 int questionId = questionsIdsList.get(questionsIdsList.size() - 1);
-                boolean userAnswer = answer.equals("true");
+                boolean userAnswer = false;
+                if (answer != null) {
+                    userAnswer = answer.equals("true");
+                }
                 answersMap.put(questionId, userAnswer);
                 logger.debug("answerMap = " + answersMap);
                 int quizId = (int) session.getAttribute(CURRENT_QUIZ_ID);
@@ -98,7 +102,7 @@ public class QuestionController extends DependencyInjectionServlet {
             boolean isLast = question.getName() == questionsIds.size();
             int nextQuestionId;
             if (isLast == false) {
-                nextQuestionId = questionsIds.get(question.getId());
+                nextQuestionId = questionsIds.get(question.getName());
             } else {
                 nextQuestionId = -1;
                 session.setAttribute(CURRENT_QUIZ_ID, currentQuizId);
@@ -106,7 +110,7 @@ public class QuestionController extends DependencyInjectionServlet {
             }
             logger.debug("nextQuestionId = " + nextQuestionId);
 
-            // Handle answer
+            // Handle answers
             int previousQuestionId;
             if (questionsIdsList == null) {
                 previousQuestionId = -1;
@@ -125,12 +129,10 @@ public class QuestionController extends DependencyInjectionServlet {
             req.setAttribute(ATTRIBUTE_QUESTION, question);
             req.setAttribute(ATTRIBUTE_IS_LAST, isLast);
             req.setAttribute(ATTRIBUTE_ANSWERS, answers);
-//            req.setAttribute(ATTRIBUTE_CURRENT_QUESTION_ID, currentQuestionId);
             req.setAttribute(ATTRIBUTE_NEXT_QUESTION_ID, nextQuestionId);
             logger.debug("set attribute '" + ATTRIBUTE_QUESTION + "' to " + question);
             logger.debug("set attribute '" + ATTRIBUTE_IS_LAST + "' to " + isLast);
             logger.debug("set attribute '" + ATTRIBUTE_ANSWERS + "' to " + answers);
-//            logger.debug("set attribute '" + ATTRIBUTE_CURRENT_QUESTION_ID + "' to " + ATTRIBUTE_CURRENT_QUESTION_ID);
             logger.debug("set attribute nextQuestionId '" + ATTRIBUTE_NEXT_QUESTION_ID + "' to " + nextQuestionId);
             // OK
             req.getRequestDispatcher(PAGE_OK).forward(req, resp);

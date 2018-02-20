@@ -12,15 +12,19 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import static com.company.quiz.controller.SessionAttributes.COMPLETED_QUIZZES;
 import static com.company.util.ClassName.getCurrentClassName;
 
 public class QuizController extends DependencyInjectionServlet {
     public static final String PARAM_ID = "id";
     public static final String ATTRIBUTE_QUIZ_TO_VIEW = "quiz";
     public static final String ATTRIBUTE_REDIRECT_TO_QUIZ_ID = "redirectToQuizId";
+    public static final String ATTRIBUTE_QUIZ_COMPLETED = "completed";
     public static final String FIRST_ID = "firstId";
     public static final String PAGE_OK = "quiz.jsp";
     public static final String PAGE_ERROR = "show-error.jsp";
@@ -55,6 +59,17 @@ public class QuizController extends DependencyInjectionServlet {
                     }
                     return quizDao.selectInfoById(id);
                 });
+                // Detect completing quiz
+                HttpSession session = req.getSession();
+                Map<Integer, String> completedQuizzes = (Map<Integer, String>) session.getAttribute(COMPLETED_QUIZZES);
+                if (completedQuizzes.get(id).contains("Completed!")) {
+                    req.setAttribute(ATTRIBUTE_QUIZ_COMPLETED, true);
+                    logger.debug("set attribute '" + ATTRIBUTE_QUIZ_COMPLETED + "' to " + ATTRIBUTE_QUIZ_COMPLETED);
+                } else {
+                    req.setAttribute(ATTRIBUTE_QUIZ_COMPLETED, false);
+                    logger.debug("set attribute '" + ATTRIBUTE_QUIZ_COMPLETED + "' to " + ATTRIBUTE_QUIZ_COMPLETED);
+                }
+
                 List<Question> questions = txManager.call(() -> questionDao.selectInfoByQuizId(quiz.getId()));
                 int firstId = questions.get(0).getId();
                 req.setAttribute(ATTRIBUTE_QUIZ_TO_VIEW, quiz);

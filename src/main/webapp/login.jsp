@@ -30,7 +30,7 @@
     <br><input name="password" id="password" type="password" placeholder
         ="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/> <span class="error"> ${errorMap.password}</span>
     <br><br><input type="submit" value="<fmt:message key="submit" bundle="${bundle}"/>"/>
-    <input type="reset" value="reset">
+    <input type="reset" value="<fmt:message key="reset" bundle="${bundle}"/>">
 </form>
 <p><a href="register"><fmt:message key="Create_new_account" bundle="${bundle}"/></a></p>
 <p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>

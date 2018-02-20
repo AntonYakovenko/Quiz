@@ -14,9 +14,9 @@
 <body>
 
 <c:if test="${question.id eq -1}">
-    <h2 class="header">Congratulations! You've done it!</h2>
+    <h2 class="header"><fmt:message key="Congratulations!_You've_done_it!" bundle="${bundle}"/></h2>
     <p>
-    <form action="quizAll.do?id=${sessionScope.currQuizId}" method="post">
+    <form action="quizAll.do" method="post">
         <input type="submit" value="Show result">
     </form>
 </c:if>
@@ -33,8 +33,7 @@
             <input type="submit" value="<fmt:message key="Next" bundle="${bundle}"/>">
         </c:if>
         <c:if test="${isLast eq true}">
-            <input type="submit" value="<fmt:message key="Finish" bundle="${bundle}"/>" <%--formaction
-                    ="quiz.do?id=${question.quizId}"--%>>
+            <input type="submit" value="<fmt:message key="Finish" bundle="${bundle}"/>">
         </c:if>
     </form>
 
