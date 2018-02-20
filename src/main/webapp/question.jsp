@@ -1,4 +1,3 @@
-<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,25 +13,35 @@
 </head>
 <body>
 
-<h2 class="header"><fmt:message key="Question" bundle="${bundle}"/> №${currId}</h2>
-<hr>
-${question.description}
-<form action="./question.do?id=${nextQuestionId}" method="post">
-    <c:forEach var="answer" items="${answers}">
-        <p><input type="radio" name="answers" value="${answer.correct}">${answer.answer}</p>
-    </c:forEach>
-    <c:if test="${isLast eq false}">
-        <input type="submit" value="<fmt:message key="Next" bundle="${bundle}"/>">
-    </c:if>
-    <c:if test="${isLast eq true}">
-        <input type="submit" value="<fmt:message key="Finish" bundle="${bundle}"/>" formaction
-                ="quiz.do?id=${question.quizId}">
-    </c:if>
-</form>
+<c:if test="${question.id eq -1}">
+    <h2 class="header">Congratulations! You've done it!</h2>
+    <p>
+    <form action="quizAll.do?id=${sessionScope.currQuizId}" method="post">
+        <input type="submit" value="Show result">
+    </form>
+</c:if>
 
-<%--<fmt:message key="Explanation" bundle="${bundle}"/>: ${question.explanation}--%>
+<c:if test="${question.id ne -1}">
+    <h2 class="header"><fmt:message key="Question" bundle="${bundle}"/> №${question.name}</h2>
+    <hr>
+    ${question.description}
+    <form action="./question.do?id=${nextQuestionId}" method="post">
+        <c:forEach var="answer" items="${answers}">
+            <p><input type="radio" name="answer" value="${answer.correct}">${answer.answer}</p>
+        </c:forEach>
+        <c:if test="${isLast eq false}">
+            <input type="submit" value="<fmt:message key="Next" bundle="${bundle}"/>">
+        </c:if>
+        <c:if test="${isLast eq true}">
+            <input type="submit" value="<fmt:message key="Finish" bundle="${bundle}"/>" <%--formaction
+                    ="quiz.do?id=${question.quizId}"--%>>
+        </c:if>
+    </form>
 
-<hr>
+    <%--<fmt:message key="Explanation" bundle="${bundle}"/>: ${question.explanation}--%>
+
+    <hr>
+</c:if>
 <%--<a href="quiz.do?id=${quiz}"><fmt:message key="All_questions" bundle="${bundle}"/></a>--%>
 <%--<p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>--%>
 <p><a href="logout.do?redirectTo=question.do!id*${question.id}@quizId*${quiz}">LOGOUT</a></p>

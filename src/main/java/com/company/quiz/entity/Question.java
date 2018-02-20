@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Question {
     private int id;
-    private String name;
+    private int name;
     private String description;
     private List<Answer> answers;
     private String explanation;
@@ -14,7 +14,11 @@ public class Question {
 
     public Question() {}
 
-    public Question(int id, String name, String description, List<Answer> answers, String explanation, List<Theme> themes, int quizId) {
+    public Question(int id, int quizId) {
+        this.id = id;
+    }
+
+    public Question(int id, int name, String description, List<Answer> answers, String explanation, List<Theme> themes, int quizId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -32,11 +36,11 @@ public class Question {
         this.id = id;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(int name) {
         this.name = name;
     }
 

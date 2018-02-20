@@ -49,4 +49,9 @@ public class QuestionDaoMock implements QuestionDao {
 //        return new ArrayList<>(memory.values());
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public List<Integer> selectQuestionsIdsByQuizId(int byQuizId) throws DaoSystemException {
+        return null;
+    }
 }

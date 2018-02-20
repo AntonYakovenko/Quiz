@@ -10,4 +10,6 @@ public interface QuestionDao {
     Question selectInfoById(int byId) throws DaoSystemException;
 
     List<Question> selectInfoByQuizId(int byQuizId) throws DaoSystemException;
+
+    List<Integer> selectQuestionsIdsByQuizId(int byQuizId) throws DaoSystemException;
 }

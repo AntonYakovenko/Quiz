@@ -12,20 +12,20 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import static com.company.quiz.controller.SessionAttributes.*;
 import static com.company.util.ClassName.getCurrentClassName;
 
 public class QuestionController extends DependencyInjectionServlet {
     public static final String PARAM_QUESTION_ID = "id";
+    public static final String PARAM_ANSWER = "answer";
     public static final String ATTRIBUTE_QUESTION = "question";
     public static final String ATTRIBUTE_IS_LAST = "isLast";
     public static final String ATTRIBUTE_ANSWERS = "answers";
-    public static final String ATTRIBUTE_CURRENT_QUESTION_ID = "currId";
+    //    public static final String ATTRIBUTE_CURRENT_QUESTION_ID = "currId";
     public static final String ATTRIBUTE_NEXT_QUESTION_ID = "nextQuestionId";
     public static final String PAGE_OK = "question.jsp";
     public static final String PAGE_ERROR = "show-error.jsp";
@@ -51,16 +51,38 @@ public class QuestionController extends DependencyInjectionServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idQuestion = req.getParameter(PARAM_QUESTION_ID);
+        String answer = req.getParameter(PARAM_ANSWER);
+        HttpSession session = req.getSession();
+        List<Integer> questionsIdsList = (List<Integer>) session.getAttribute(QUESTIONS_IDS_OF_CURRENT_QUIZ);
+        Map<Integer, Boolean> answersMap = new HashMap<>();
+
         try {
             final Integer id = Integer.valueOf(idQuestion);
+
+            // Handle last answer
+            if (id == -1) {
+                int questionId = questionsIdsList.get(questionsIdsList.size() - 1);
+                boolean userAnswer = answer.equals("true");
+                answersMap.put(questionId, userAnswer);
+                logger.debug("answerMap = " + answersMap);
+                int quizId = (int) session.getAttribute(CURRENT_QUIZ_ID);
+                Question question = new Question(-1, quizId);
+                req.setAttribute(ATTRIBUTE_QUESTION, question);
+                logger.debug("set attribute '" + ATTRIBUTE_QUESTION + "' to " + question);
+                req.getRequestDispatcher(PAGE_OK).forward(req, resp);
+                logger.debug("PAGE_OK: RequestDispatcher.forward(...) to " + PAGE_OK);
+                return;
+            }
+
             Question question;
+            List<Answer> answers;
             question = txManager.call(() -> {
                 if (questionDao.selectInfoById(id) == null) {
                     logger.warn("No question for such id");
                 }
                 return questionDao.selectInfoById(id);
             });
-            List<Answer> answers = txManager.call(() ->
+            answers = txManager.call(() ->
             {
                 if (answerDao.selectByQuestionId(question.getId()) == null) {
                     logger.warn("No answers for such question.id");
@@ -68,35 +90,48 @@ public class QuestionController extends DependencyInjectionServlet {
                 return answerDao.selectByQuestionId(question.getId());
             });
 
-            // Defining first and last question in quiz
+            // Defining next and last questions in quiz
             int currentQuizId = question.getQuizId();
-            List<Question> questions = txManager.call(() -> questionDao.selectInfoByQuizId(currentQuizId));
-            Map<Integer, Integer> questionsIds = new HashMap<>();
-            for (int i = 0; i < questions.size(); i++) {
-                questionsIds.put(questions.get(i).getId(), i + 1);
-            }
-            List<Integer> idsInQuiz = new ArrayList<>();
-            for (Question questionInQuiz : questions) {
-                idsInQuiz.add(questionInQuiz.getId());
-            }
-            int currentQuestionId = questionsIds.get(question.getId());
-            boolean isLast = currentQuestionId == questions.size();
+            List<Integer> questionsIds = txManager.call(() -> questionDao.selectQuestionsIdsByQuizId(currentQuizId));
+            session.setAttribute(QUESTIONS_IDS_OF_CURRENT_QUIZ, questionsIds);
+            logger.debug("set attribute '" + QUESTIONS_IDS_OF_CURRENT_QUIZ + "' to " + questionsIds);
+            boolean isLast = question.getName() == questionsIds.size();
             int nextQuestionId;
             if (isLast == false) {
-                nextQuestionId = idsInQuiz.get(currentQuestionId);
+                nextQuestionId = questionsIds.get(question.getId());
             } else {
-                nextQuestionId = 0;
+                nextQuestionId = -1;
+                session.setAttribute(CURRENT_QUIZ_ID, currentQuizId);
+                logger.debug("set attribute '" + CURRENT_QUIZ_ID + "' to " + currentQuizId);
+            }
+            logger.debug("nextQuestionId = " + nextQuestionId);
+
+            // Handle answer
+            int previousQuestionId;
+            if (questionsIdsList == null) {
+                previousQuestionId = -1;
+            } else {
+                previousQuestionId = questionsIdsList.get(question.getName() - 2);
+            }
+            if (answer != null) {
+                boolean userAnswer = answer.equals("true");
+                if (previousQuestionId != -1) {
+                    answersMap.put(previousQuestionId, userAnswer);
+                }
+                session.setAttribute(ANSWERS_MAP, answersMap);
+                logger.debug("answersMap = " + answersMap);
             }
 
             req.setAttribute(ATTRIBUTE_QUESTION, question);
             req.setAttribute(ATTRIBUTE_IS_LAST, isLast);
             req.setAttribute(ATTRIBUTE_ANSWERS, answers);
-            req.setAttribute(ATTRIBUTE_CURRENT_QUESTION_ID, currentQuestionId);
+//            req.setAttribute(ATTRIBUTE_CURRENT_QUESTION_ID, currentQuestionId);
             req.setAttribute(ATTRIBUTE_NEXT_QUESTION_ID, nextQuestionId);
             logger.debug("set attribute '" + ATTRIBUTE_QUESTION + "' to " + question);
             logger.debug("set attribute '" + ATTRIBUTE_IS_LAST + "' to " + isLast);
             logger.debug("set attribute '" + ATTRIBUTE_ANSWERS + "' to " + answers);
-            logger.debug("set attribute '" + ATTRIBUTE_CURRENT_QUESTION_ID + "' to " + ATTRIBUTE_CURRENT_QUESTION_ID);
+//            logger.debug("set attribute '" + ATTRIBUTE_CURRENT_QUESTION_ID + "' to " + ATTRIBUTE_CURRENT_QUESTION_ID);
+            logger.debug("set attribute nextQuestionId '" + ATTRIBUTE_NEXT_QUESTION_ID + "' to " + nextQuestionId);
             // OK
             req.getRequestDispatcher(PAGE_OK).forward(req, resp);
             logger.debug("PAGE_OK: RequestDispatcher.forward(...) to " + PAGE_OK);

@@ -36,7 +36,7 @@ public class QuestionDaoJdbc implements QuestionDao {
                 question = new Question();
                 int currentQuestionId = rs.getInt("id");
                 question.setId(currentQuestionId);
-                question.setName(rs.getString("name"));
+                question.setName(rs.getInt("name"));
                 question.setDescription(rs.getString("description"));
                 question.setExplanation(rs.getString("explanation"));
                 question.setQuizId(rs.getInt("quizId"));
@@ -61,7 +61,7 @@ public class QuestionDaoJdbc implements QuestionDao {
                 Question question = new Question();
                 int currentQuestionId = rs.getInt("id");
                 question.setId(currentQuestionId);
-                question.setName(rs.getString("name"));
+                question.setName(rs.getInt("name"));
                 question.setDescription(rs.getString("description"));
                 question.setExplanation(rs.getString("explanation"));
                 question.setQuizId(rs.getInt("quizId"));
@@ -73,5 +73,15 @@ public class QuestionDaoJdbc implements QuestionDao {
             e.printStackTrace();
             throw new DaoSystemException();
         }
+    }
+
+    @Override
+    public List<Integer> selectQuestionsIdsByQuizId(int byQuizId) throws DaoSystemException {
+        List<Question> questions = selectInfoByQuizId(byQuizId);
+        List<Integer> questionsIds = new ArrayList<>();
+        for (Question question : questions) {
+            questionsIds.add(question.getId());
+        }
+        return questionsIds;
     }
 }
