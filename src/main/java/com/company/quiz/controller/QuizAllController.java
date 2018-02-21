@@ -47,8 +47,6 @@ public class QuizAllController extends DependencyInjectionServlet {
             Map<Integer, Boolean> answersMap = (Map<Integer, Boolean>) session.getAttribute(ANSWERS_MAP);
             List<Integer> questionsIdsList = (List<Integer>) session.getAttribute(QUESTIONS_IDS_OF_CURRENT_QUIZ);
             Map<Integer, String> completedQuizzes = (Map<Integer, String>) session.getAttribute(COMPLETED_QUIZZES);
-            logger.debug("answerMap = " + answersMap);
-            logger.debug("questionsIdsList = " + questionsIdsList);
 
             // Count correct answers
             String result = "";

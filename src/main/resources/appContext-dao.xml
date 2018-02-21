@@ -26,7 +26,7 @@
 
     <!--<jdbc:embedded-database id="dataSource" type="H2">-->
         <!--<jdbc:script location="classpath:schema"/>-->
-        <!--<jdbc:script location="classpath:test-data"/>-->
+        <!--<jdbc:script location="classpath:intro-data"/>-->
     <!--</jdbc:embedded-database>-->
 
     <bean id="txManager" class="com.company.quiz.dao.tx.TransactionManagerImpl">

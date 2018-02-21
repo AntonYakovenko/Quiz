@@ -99,7 +99,6 @@ public class RegisterNewUserController extends DependencyInjectionServlet {
             }
         }
         req.setAttribute("errorMap", errorMap);
-
         req.getRequestDispatcher(PAGE_MORE_INFO).forward(req, resp);
         logger.debug("REGISTRATION - FAIL: errorMap: " + errorMap);
     }

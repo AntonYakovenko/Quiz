@@ -23,6 +23,10 @@ public class UserValidatorImpl implements UserValidator {
             errorMap.put("login", "login.length() < 3");
         } else if (login.length() > 10) {
             errorMap.put("login", "login.length() > 10");
+        } else for (Character chars : login.toCharArray()) {
+            if (Character.isWhitespace(chars)) {
+                errorMap.put("login", "no whitespaces allowed");
+            }
         }
     }
 
@@ -33,9 +37,13 @@ public class UserValidatorImpl implements UserValidator {
             errorMap.put("name", "name.length() < 3");
         } else if (name.length() > 10) {
             errorMap.put("name", "name.length() > 10");
-        } /*else if (name.matches("[0-9]+")) {
-            errorMap.put("name", "name contains digits");
-        }*/
+        } else if (!name.matches("[a-zA-Z]+")) {
+            errorMap.put("name", "name must contains only a-z or A-Z");
+        } else for (Character chars : name.toCharArray()) {
+            if (Character.isWhitespace(chars)) {
+                errorMap.put("login", "no whitespaces allowed");
+            }
+        }
     }
 
     private void validatePassword(String password, Map<String, String> errorMap) {
@@ -45,20 +53,16 @@ public class UserValidatorImpl implements UserValidator {
             errorMap.put("password", "password.length() < 3");
         } else if (password.length() > 10) {
             errorMap.put("password", "password.length() > 10");
+        } else for (Character chars : password.toCharArray()) {
+            if (Character.isWhitespace(chars)) {
+                errorMap.put("login", "no whitespaces allowed");
+            }
         }
-
     }
 
     private void validateEmail(String email, Map<String, String> errorMap) {
-        if (email == null) {
-            errorMap.put("email", "email == null");
-        } else if (email.length() < 3) {
-            errorMap.put("email", "email.length() < 3");
-        } else if (email.length() > 20) {
-            errorMap.put("email", "email.length() > 10");
-        } else if (!email.contains("@")) {
-            errorMap.put("email", "email doesn't contain '@'");
+        if (!email.matches("^[\\w\\d._-]+@[\\w\\d.-]+\\.[\\w\\d]{2,6}$")) {
+            errorMap.put("email", "incorrect email");
         }
-
     }
 }

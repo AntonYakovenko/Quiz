@@ -1,4 +1,4 @@
-package com.company.quiz.dao.impl.test;
+package com.company.examples_jdbc.intro;
 
 import java.sql.Driver;
 import java.sql.DriverManager;
