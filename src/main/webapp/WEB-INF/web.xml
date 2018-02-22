@@ -87,16 +87,6 @@
         <url-pattern>/logout.do</url-pattern>
     </servlet-mapping>
 
-    <!--Language-->
-    <servlet>
-        <servlet-name>LanguageController</servlet-name>
-        <servlet-class>com.company.quiz.controller.LanguageController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LanguageController</servlet-name>
-        <url-pattern>/language</url-pattern>
-    </servlet-mapping>
-
     <!--FILTERS-->
 
     <!--Security-->
@@ -108,6 +98,16 @@
     <filter-mapping>
         <filter-name>SecurityFilter</filter-name>
         <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+    <!--Language-->
+    <filter>
+        <filter-name>LanguageFilter</filter-name>
+        <filter-class>com.company.quiz.filter.LanguageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LanguageFilter</filter-name>
+        <url-pattern>/language</url-pattern>
     </filter-mapping>
 
     <!--Performance-->

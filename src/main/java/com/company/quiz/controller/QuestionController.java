@@ -48,6 +48,7 @@ public class QuestionController extends DependencyInjectionServlet {
         processRequest(req, resp);
     }
 
+    @SuppressWarnings("unchecked")
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idQuestion = req.getParameter(PARAM_QUESTION_ID);
         String answer = req.getParameter(PARAM_ANSWER);

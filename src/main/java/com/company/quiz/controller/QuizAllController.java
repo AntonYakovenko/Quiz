@@ -41,6 +41,7 @@ public class QuizAllController extends DependencyInjectionServlet {
         processRequest(req, resp);
     }
 
+    @SuppressWarnings("unchecked")
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             HttpSession session = req.getSession();

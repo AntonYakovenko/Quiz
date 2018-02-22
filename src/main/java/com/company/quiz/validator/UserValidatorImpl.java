@@ -53,11 +53,11 @@ public class UserValidatorImpl implements UserValidator {
             errorMap.put("password", "password.length() < 3");
         } else if (password.length() > 10) {
             errorMap.put("password", "password.length() > 10");
-        } else for (Character chars : password.toCharArray()) {
+        } /*else for (Character chars : password.toCharArray()) {
             if (Character.isWhitespace(chars)) {
                 errorMap.put("login", "no whitespaces allowed");
             }
-        }
+        }*/
     }
 
     private void validateEmail(String email, Map<String, String> errorMap) {
