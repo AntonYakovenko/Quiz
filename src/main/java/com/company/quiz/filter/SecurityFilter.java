@@ -5,13 +5,15 @@ import org.apache.log4j.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.company.quiz.controller.SessionAttributes.USER;
-import static com.company.quiz.filter.security.UrlCodec.encode;
+import static com.company.quiz.filter.UrlCodec.encode;
 
+@WebFilter(filterName = "securityFilter", urlPatterns = "*.do")
 public class SecurityFilter extends BaseFilter implements Filter {
     private static final Logger logger = Logger.getLogger(SecurityFilter.class);
 

@@ -10,6 +10,7 @@ import com.company.quiz.entity.Question;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import java.util.*;
 import static com.company.quiz.controller.SessionAttributes.*;
 import static com.company.util.ClassName.getCurrentClassName;
 
+@WebServlet(name = "questionController", urlPatterns = "/question.do")
 public class QuestionController extends DependencyInjectionServlet {
     public static final String PARAM_QUESTION_ID = "id";
     public static final String PARAM_ANSWER = "answer";

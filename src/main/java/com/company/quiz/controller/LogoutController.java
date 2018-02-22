@@ -4,13 +4,15 @@ import com.company.inject.DependencyInjectionServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.company.quiz.filter.security.UrlCodec.decode;
+import static com.company.quiz.filter.UrlCodec.decode;
 import static com.company.util.ClassName.getCurrentClassName;
 
+@WebServlet(name = "logoutController", urlPatterns = "/logout.do")
 public class LogoutController extends DependencyInjectionServlet {
     public static final String PARAMETER_NAME_REDIRECT_TO = "redirectTo";
     public static final String BASE_PAGE = "index.jsp";

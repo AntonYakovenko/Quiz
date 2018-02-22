@@ -5,6 +5,7 @@ import com.company.quiz.entity.Quiz;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import static com.company.quiz.controller.SessionAttributes.QUIZZES_IN_BUCKET;
 import static com.company.util.ClassName.getCurrentClassName;
 import static java.util.Collections.unmodifiableList;
 
+@WebServlet(name = "quizRemoveFromBucketController", urlPatterns = "/quizRemoveFromBucket.do")
 public class QuizRemoveFromBucketController extends DependencyInjectionServlet {
     public static final String PARAM_ID = "id";
     public static final String PARAM_REDIRECT_TO_ID = "redirectToId";
@@ -24,6 +26,7 @@ public class QuizRemoveFromBucketController extends DependencyInjectionServlet {
 
     public static final Logger logger = Logger.getLogger(getCurrentClassName());
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getParameter(PARAM_ID);

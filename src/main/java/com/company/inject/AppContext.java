@@ -6,9 +6,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 import static com.company.util.ClassName.getCurrentClassName;
 
+@WebListener
 public class AppContext implements ServletContextListener {
     private static final String APP_CTX_PATH = "contextConfigLocation";
     private static final Logger logger = Logger.getLogger(getCurrentClassName());

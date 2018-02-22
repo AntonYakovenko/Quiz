@@ -1,4 +1,4 @@
-package com.company.quiz.filter.security;
+package com.company.quiz.filter;
 
 public class UrlCodec {
     private UrlCodec() {}

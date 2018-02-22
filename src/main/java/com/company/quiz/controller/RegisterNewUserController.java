@@ -11,6 +11,7 @@ import com.company.quiz.validator.UserValidator;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 import static com.company.util.ClassName.getCurrentClassName;
 
+@WebServlet(name = "registerNewUserController", urlPatterns = "/register")
 public class RegisterNewUserController extends DependencyInjectionServlet {
     public static final String PARAM_LOGIN = "login";
     public static final String PARAM_NAME = "name";

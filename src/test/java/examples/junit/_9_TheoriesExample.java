@@ -40,11 +40,11 @@ public class _9_TheoriesExample {
         assertThat(example, everyItem(greaterThanOrEqualTo("A")));
     }
 
-    /**
-     * This theory confirms that all lists doesn't contain "X" or "Y"
-     */
-    @Theory
-    public void excludeXY(List<String> example) {
-        assertThat(example, not(anyOf(hasItem("X"), hasItem("Y"))));
-    }
+//    /**
+//     * This theory confirms that all lists doesn't contain "X" or "Y"
+//     */
+//    @Theory
+//    public void excludeXY(List<String> example) {
+//        assertThat(example, not(anyOf(hasItem("X"), hasItem("Y"))));
+//    }
 }

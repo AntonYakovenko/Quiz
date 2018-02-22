@@ -17,7 +17,7 @@
     <h2 class="header"><fmt:message key="Congratulations!_You've_done_it!" bundle="${bundle}"/></h2>
     <p>
     <form action="quizAll.do" method="post">
-        <input type="submit" value="Show result">
+        <input type="submit" value="<fmt:message key="Show_result" bundle="${bundle}"/>">
     </form>
 </c:if>
 
@@ -43,7 +43,7 @@
 </c:if>
 <%--<a href="quiz.do?id=${quiz}"><fmt:message key="All_questions" bundle="${bundle}"/></a>--%>
 <%--<p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>--%>
-<p><a href="logout.do?redirectTo=question.do!id*${question.id}@quizId*${quiz}">LOGOUT</a></p>
+<p><a href="logout.do?redirectTo=question.do!id*${question.id}@quizId*${quiz}"><fmt:message key="Logout" bundle="${bundle}"/></a></p>
 
 </body>
 </html>

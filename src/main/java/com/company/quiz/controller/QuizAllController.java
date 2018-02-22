@@ -8,6 +8,7 @@ import com.company.quiz.entity.Quiz;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import java.util.Map;
 import static com.company.quiz.controller.SessionAttributes.*;
 import static com.company.util.ClassName.getCurrentClassName;
 
+@WebServlet(name = "quizAllController", urlPatterns = "/quizAll.do")
 public class QuizAllController extends DependencyInjectionServlet {
     public static final String ATTRIBUTE_QUIZZES_SIMPLE_INFO = "quizzesSimpleInfo";
     public static final String PAGE_OK = "quizAll.jsp";

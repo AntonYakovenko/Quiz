@@ -10,6 +10,7 @@ import com.company.quiz.validator.UserValidator;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,9 +18,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static com.company.quiz.filter.security.UrlCodec.decode;
+import static com.company.quiz.filter.UrlCodec.decode;
 import static com.company.util.ClassName.getCurrentClassName;
 
+@WebServlet(name = "loginController", urlPatterns = "/login.do")
 public class LoginController extends DependencyInjectionServlet {
     public static final String PARAMETER_LOGIN = "login";
     public static final String PARAMETER_PASSWORD = "password";
