@@ -4,6 +4,7 @@ import com.company.inject.DependencyInjectionServlet;
 import com.company.inject.Inject;
 import com.company.quiz.dao.QuestionDao;
 import com.company.quiz.dao.QuizDao;
+import com.company.quiz.dao.exception.DaoException;
 import com.company.quiz.dao.tx.TransactionManager;
 import com.company.quiz.entity.Question;
 import com.company.quiz.entity.Quiz;
@@ -15,10 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import static com.company.quiz.controller.SessionAttributes.COMPLETED_QUIZZES;
+import static com.company.quiz.controller.SessionAttributes.CURRENT_QUIZ_ID;
+import static com.company.quiz.controller.SessionAttributes.QUESTIONS_IDS_OF_CURRENT_QUIZ;
 import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "quizController", urlPatterns = "/quiz.do")
@@ -34,14 +38,14 @@ public class QuizController extends DependencyInjectionServlet {
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 
     @Inject("txManager")
-    private TransactionManager txManager;
+    TransactionManager txManager;
     @Inject("quizDao")
-    private QuizDao quizDao;
+    QuizDao quizDao;
     @Inject("questionDao")
     private QuestionDao questionDao;
 
     @Override
-    protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         processRequest(req, resp);
     }
 
@@ -50,6 +54,7 @@ public class QuizController extends DependencyInjectionServlet {
         processRequest(req, resp);
     }
 
+    @SuppressWarnings("unchecked")
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null && !idStr.equals("")) {
@@ -64,7 +69,7 @@ public class QuizController extends DependencyInjectionServlet {
                 // Detect completing quiz
                 HttpSession session = req.getSession();
                 Map<Integer, String> completedQuizzes = (Map<Integer, String>) session.getAttribute(COMPLETED_QUIZZES);
-                if (completedQuizzes.get(id).contains("Completed!")) {
+                if (completedQuizzes != null && completedQuizzes.get(id).contains("Completed!")) {
                     req.setAttribute(ATTRIBUTE_QUIZ_COMPLETED, true);
                     logger.debug("set attribute '" + ATTRIBUTE_QUIZ_COMPLETED + "' to " + ATTRIBUTE_QUIZ_COMPLETED);
                 } else {
@@ -84,7 +89,7 @@ public class QuizController extends DependencyInjectionServlet {
                 req.getRequestDispatcher(PAGE_OK).forward(req, resp);
                 logger.debug("PAGE_OK: RequestDispatcher.forward(...) to " + PAGE_OK);
                 return;
-            } catch (Exception e) {
+            } catch (SQLException | DaoException | NumberFormatException e) {
                 e.printStackTrace();
                 logger.debug("Some error", e);
             }

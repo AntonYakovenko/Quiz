@@ -99,6 +99,7 @@ public class QuestionController extends DependencyInjectionServlet {
 
             // Defining next and last questions in quiz
             int currentQuizId = question.getQuizId();
+            // todo: convert ArrayList to LinkedList
             List<Integer> questionsIds = txManager.call(() -> questionDao.selectQuestionsIdsByQuizId(currentQuizId));
             session.setAttribute(QUESTIONS_IDS_OF_CURRENT_QUIZ, questionsIds);
             logger.debug("set attribute '" + QUESTIONS_IDS_OF_CURRENT_QUIZ + "' to " + questionsIds);

@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import static examples.hamcrest.StartWith.startWith;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -24,13 +25,13 @@ public class _9_TheoriesExample {
         };
     }
 
-//    /**
-//     * This theory confirms that all lists start with "A" than "B"
-//     */
-//    @Theory
-//    public void firstElementAreAB(List<String> example) {
-//        assertThat(example, startWith("A", "B"));
-//    }
+    /**
+     * This theory confirms that all lists start with "A" than "B"
+     */
+    @Theory
+    public void firstElementAreAB(List<String> example) {
+        assertThat(example, startWith("A", "B"));
+    }
 
     /**
      * This theory confirms that all lists contains only elements greater or equal "A"
