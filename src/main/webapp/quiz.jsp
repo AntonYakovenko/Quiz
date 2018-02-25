@@ -10,44 +10,51 @@
 <fmt:setBundle basename="lang" var="bundle"/>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="pages.css">
     <title>Quiz</title>
-    <%--<%@ include file="WEB-INF/jspf/cssinclude.jspf"%>--%>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="pages.css">
 </head>
 <body>
-<p><fmt:message key="Login" bundle="${bundle}"/>: ${user.login}</p>
-<p><fmt:message key="Name" bundle="${bundle}"/>: ${user.name}</p>
+<div class="container-fluid">
+    <p><fmt:message key="Login" bundle="${bundle}"/>: ${user.login}</p>
+    <p><fmt:message key="Name" bundle="${bundle}"/>: ${user.name}</p>
 
-<h2 class="header"><span style="text-decoration: underline;"><fmt:message key="Quiz" bundle="${bundle}"/></span>: ${quiz.name}</h2>
-<ul>
-    <li><fmt:message key="Description" bundle="${bundle}"/>: ${quiz.description}</li>
-    <form action="./question.do?id=${firstId}" method="post">
-        <c:if test="${completed eq true}">
-            <p><fmt:message key="You've_already_passed_this_quiz" bundle="${bundle}"/></p>
-        </c:if>
-        <c:if test="${completed eq false}">
-            <input type="submit" value="<fmt:message key="Start" bundle="${bundle}"/>">
-        </c:if>
-    </form>
-</ul>
+    <h2 class="header"><b><fmt:message key="Quiz" bundle="${bundle}"/>: ${quiz.name}</b></h2>
+    <ul>
+        <li><fmt:message key="Description" bundle="${bundle}"/>: ${quiz.description}</li>
+        <form action="./question.do?id=${firstId}" method="post">
+            <c:if test="${completed eq true}">
+                <div class="alert alert-danger col-4" role="alert">
+                    <fmt:message key="You've_already_passed_this_quiz" bundle="${bundle}"/>
+                </div>
+            </c:if>
+            <c:if test="${completed eq false}">
+                <input type="submit" class="btn btn-primary btn-margin" value="<fmt:message key="Start" bundle="${bundle}"/>">
+            </c:if>
+        </form>
+    </ul>
 
-<a href="quizAll.do"><fmt:message key="Quizzes_list" bundle="${bundle}"/></a>
+    <a href="quizAll.do"><fmt:message key="Quizzes_list" bundle="${bundle}"/></a>
 
-<%--Add quiz to bucket--%>
-<p><a href="./quizAddToBucket.do?id=${quiz.id}">
-    <fmt:message key="Add_this_quiz_to_bucket" bundle="${bundle}"/>
-</a></p>
+    <%--Add quiz to bucket--%>
+    <p><a href="./quizAddToBucket.do?id=${quiz.id}">
+        <fmt:message key="Add_this_quiz_to_bucket" bundle="${bundle}"/>
+    </a></p>
 
-<%--Show quiz bucket--%>
-<h2 class="header"><fmt:message key="Bucket" bundle="${bundle}"/></h2>
-<ul>
-    <c:forEach var="quizInBucket" items="${quizzesInBucket}">
-        <li><a href="./quiz.do?id=${quizInBucket.id}">${quizInBucket.name}</a>(<a
-                href="./quizRemoveFromBucket.do?id=${quizInBucket.id}&redirectToId=${redirectToQuizId}">X</a>)
-        </li>
-    </c:forEach>
-</ul>
-<p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>
-<p><a href="logout.do?redirectTo=quiz.do!id*${quiz.id}"><fmt:message key="Logout" bundle="${bundle}"/></a></p>
+    <%--Show quiz bucket--%>
+    <h3 class="header"><b><fmt:message key="Bucket" bundle="${bundle}"/></b></h3>
+    <ul>
+        <c:forEach var="quizInBucket" items="${quizzesInBucket}">
+            <li><a href="./quiz.do?id=${quizInBucket.id}">${quizInBucket.name}</a>(<a
+                    href="./quizRemoveFromBucket.do?id=${quizInBucket.id}&redirectToId=${redirectToQuizId}">X</a>)
+            </li>
+        </c:forEach>
+    </ul>
+    <p><a href="index.jsp"><fmt:message key="Main_page" bundle="${bundle}"/></a></p>
+    <p><a href="logout.do?redirectTo=quiz.do!id*${quiz.id}"><fmt:message key="Logout" bundle="${bundle}"/></a></p>
+</div>
 </body>
 </html>

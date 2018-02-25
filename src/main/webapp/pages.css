@@ -1,5 +1,6 @@
 body {
-    background-color: lightskyblue;
+    background-color: white;
+    margin-top: 10px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -8,23 +9,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header {
-    color: darkblue;
-}
-
-.blueHeader {
-    color: blue;
-    font-weight: bold;
-}
-
-.deepskyblueHeader {
-    color: deepskyblue;
-    font-weight: bold;
-}
-
-.error {
-    color: red;
+    color: #0069d9;
 }
 
 .completed {
     color: green;
+}
+.custom-select {
+    height: calc(1.5rem + 2px);
+    line-height: 1.5;
+    padding: .0rem .75rem;
+}
+
+.btn {
+    padding: .0rem .75rem;
+}
+.btn:hover {
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 10px 20px 0 rgba(0,0,0,0.19);
+}
+
+.btn-margin {
+    margin-top: 10px;
+}
+
+.alert-success {
+    margin-left: -15px;
+}
+
+.alert-danger {
+    padding: .1rem .25rem;
+    border-radius: .25rem;
 }

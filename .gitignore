@@ -1,6 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 target/
+# ignored blueprint css
 src/main/webapp/css/
+# ignored bootstrap resources
+src/main/webapp/resources/
 *.iml
 *.idea
 *example.jsp
