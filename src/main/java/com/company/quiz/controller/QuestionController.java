@@ -112,15 +112,14 @@ public class QuestionController extends DependencyInjectionServlet {
                 session.setAttribute(CURRENT_QUIZ_ID, currentQuizId);
                 logger.debug("set attribute '" + CURRENT_QUIZ_ID + "' to " + currentQuizId);
             }
-            logger.debug("nextQuestionId = " + nextQuestionId);
-
-            // Handle answers
             int previousQuestionId;
             if (questionsIdsList == null) {
                 previousQuestionId = -1;
             } else {
                 previousQuestionId = questionsIdsList.get(question.getName() - 2);
             }
+
+            // Handle answers
             if (answer != null) {
                 boolean userAnswer = answer.equals("true");
                 if (previousQuestionId != -1) {

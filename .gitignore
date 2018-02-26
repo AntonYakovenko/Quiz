@@ -6,4 +6,5 @@ src/main/webapp/css/
 src/main/webapp/resources/
 *.iml
 *.idea
-*example.jsp
+example.jsp
+example.html
