@@ -47,7 +47,7 @@ There is a list of quizzes. Each quiz contains questions with several answers, o
 * Apache Tomcat - application server
 * Servlet API, Spring IoC container, JSP, JSTL - business logic
 * MySQL - data storage
-* JDBC, HikariCP - acsess to data
+* JDBC, BoneCP - access to data
 * HTML, CSS, Bootstrap - frontend
 * Log4j - logging events
 * Git - version control

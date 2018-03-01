@@ -12,16 +12,11 @@
         <property name="location" value="db.properties"/>
     </bean>
     <!--TransactionManager, DataSource and other system classes-->
-    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-        <property name="driverClassName" value="${db.driverClassName}"/>
+    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource">
         <property name="jdbcUrl" value="${db.url}"/>
         <property name="username" value="${db.username}"/>
         <property name="password" value="${db.password}"/>
-    </bean>
-
-    <!-- HikariCP configuration -->
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-        <constructor-arg ref="hikariConfig" />
+        <property name="driverClass" value="${db.driverClassName}"/>
     </bean>
 
     <!--<jdbc:embedded-database id="dataSource" type="H2">-->

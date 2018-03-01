@@ -15,6 +15,7 @@
         <hikaricp.version>2.7.6</hikaricp.version>
         <dbh2.version>1.4.187</dbh2.version>
         <dbmysql.version>5.1.39</dbmysql.version>
+        <bonecp.version>0.8.0.RELEASE</bonecp.version>
         <log4j.version>1.2.12</log4j.version>
         <junit.version>4.12</junit.version>
         <hamcrest.version>1.3</hamcrest.version>
@@ -80,12 +81,13 @@
             <version>${jstl.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+        <!-- https://mvnrepository.com/artifact/com.jolbox/bonecp -->
         <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>${hikaricp.version}</version>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+            <version>${bonecp.version}</version>
         </dependency>
+
 
 
         <!--Spring (Business Logic Container)-->
