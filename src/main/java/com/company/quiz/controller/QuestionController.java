@@ -22,14 +22,13 @@ import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "questionController", urlPatterns = "/question.do")
 public class QuestionController extends DependencyInjectionServlet {
-    public static final String PARAM_QUESTION_ID = "id";
-    public static final String PARAM_ANSWER = "answer";
-    public static final String ATTRIBUTE_QUESTION = "question";
-    public static final String ATTRIBUTE_IS_LAST = "isLast";
-    public static final String ATTRIBUTE_ANSWERS = "answers";
-    public static final String ATTRIBUTE_NEXT_QUESTION_ID = "nextQuestionId";
-    public static final String PAGE_OK = "question.jsp";
-    public static final String PAGE_ERROR = "show-error.jsp";
+    private static final String PARAM_QUESTION_ID = "id";
+    private static final String PARAM_ANSWER = "answer";
+    private static final String ATTRIBUTE_QUESTION = "question";
+    private static final String ATTRIBUTE_IS_LAST = "isLast";
+    private static final String ATTRIBUTE_ANSWERS = "answers";
+    private static final String ATTRIBUTE_NEXT_QUESTION_ID = "nextQuestionId";
+    private static final String PAGE_OK = "question.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 

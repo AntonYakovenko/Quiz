@@ -20,9 +20,9 @@ import static java.util.Collections.unmodifiableList;
 
 @WebServlet(name = "quizRemoveFromBucketController", urlPatterns = "/quizRemoveFromBucket.do")
 public class QuizRemoveFromBucketController extends DependencyInjectionServlet {
-    public static final String PARAM_ID = "id";
-    public static final String PARAM_REDIRECT_TO_ID = "redirectToId";
-    public static final String PAGE_ERROR = "quizAll.do";
+    private static final String PARAM_ID = "id";
+    private static final String PARAM_REDIRECT_TO_ID = "redirectToId";
+    private static final String PAGE_ERROR = "quizAll.do";
 
     public static final Logger logger = Logger.getLogger(getCurrentClassName());
 

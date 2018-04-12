@@ -23,13 +23,12 @@ import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "loginController", urlPatterns = "/login.do")
 public class LoginController extends DependencyInjectionServlet {
-    public static final String PARAMETER_LOGIN = "login";
-    public static final String PARAMETER_PASSWORD = "password";
-    public static final String WRONG_AUTHORIZATION = "wrongAuthorization";
-    public static final String USER = "user";
-    public static final String PARAMETER_REDIRECT_TO = "redirectTo";
-    public static final String PAGE_WRONG_AUTHORIZATION = "login.jsp";
-    public static final String PAGE_DEFAULT = "index.jsp";
+    private static final String PARAMETER_LOGIN = "login";
+    private static final String PARAMETER_PASSWORD = "password";
+    private static final String USER = "user";
+    private static final String PARAMETER_REDIRECT_TO = "redirectTo";
+    private static final String PAGE_WRONG_AUTHORIZATION = "login.jsp";
+    private static final String PAGE_DEFAULT = "index.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 

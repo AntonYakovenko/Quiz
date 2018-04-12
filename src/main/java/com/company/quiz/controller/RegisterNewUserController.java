@@ -23,13 +23,13 @@ import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "registerNewUserController", urlPatterns = "/register")
 public class RegisterNewUserController extends DependencyInjectionServlet {
-    public static final String PARAM_LOGIN = "login";
-    public static final String PARAM_NAME = "name";
-    public static final String PARAM_PASSWORD = "password";
-    public static final String PARAM_EMAIL = "email";
-    public static final String USER = "user";
-    public static final String PAGE_REGISTERED = "index.jsp";
-    public static final String PAGE_MORE_INFO = "register.jsp";
+    private static final String PARAM_LOGIN = "login";
+    private static final String PARAM_NAME = "name";
+    private static final String PARAM_PASSWORD = "password";
+    private static final String PARAM_EMAIL = "email";
+    private static final String USER = "user";
+    private static final String PAGE_REGISTERED = "index.jsp";
+    private static final String PAGE_MORE_INFO = "register.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 

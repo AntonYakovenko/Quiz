@@ -26,8 +26,8 @@ import static java.util.Collections.unmodifiableList;
 
 @WebServlet(name = "quizAddToBucketController", urlPatterns = "/quizAddToBucket.do")
 public class QuizAddToBucketController extends DependencyInjectionServlet {
-    public static final String PARAM_ID = "id";
-    public static final String PAGE_ERROR = "quizAll.do";
+    private static final String PARAM_ID = "id";
+    private static final String PAGE_ERROR = "quizAll.do";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 

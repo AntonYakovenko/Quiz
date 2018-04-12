@@ -22,9 +22,9 @@ import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "quizAllController", urlPatterns = "/quizAll.do")
 public class QuizAllController extends DependencyInjectionServlet {
-    public static final String ATTRIBUTE_QUIZZES_SIMPLE_INFO = "quizzesSimpleInfo";
-    public static final String PAGE_OK = "quizAll.jsp";
-    public static final String PAGE_ERROR = "index.jsp";
+    private static final String ATTRIBUTE_QUIZZES_SIMPLE_INFO = "quizzesSimpleInfo";
+    private static final String PAGE_OK = "quizAll.jsp";
+    private static final String PAGE_ERROR = "index.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 

@@ -14,8 +14,8 @@ import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "logoutController", urlPatterns = "/logout.do")
 public class LogoutController extends DependencyInjectionServlet {
-    public static final String PARAMETER_NAME_REDIRECT_TO = "redirectTo";
-    public static final String BASE_PAGE = "index.jsp";
+    private static final String PARAMETER_NAME_REDIRECT_TO = "redirectTo";
+    private static final String BASE_PAGE = "index.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 

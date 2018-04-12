@@ -31,7 +31,6 @@
     </c:if>
 
     <c:if test="${question.id ne -1}">
-
         <h2 class="header"><b><fmt:message key="Question" bundle="${bundle}"/> №${question.name}</b></h2>
         <h5>${question.description}</h5>
         <form action="./question.do?id=${nextQuestionId}" method="post">
@@ -42,12 +41,16 @@
                     <label class="custom-control-label" for="answer${answer.id}"> ${answer.answer}</label>
                 </div>
             </c:forEach>
-            <c:if test="${isLast eq false}">
-                <input type="submit" class="btn btn-primary btn-margin" value="<fmt:message key="Next" bundle="${bundle}"/>">
-            </c:if>
-            <c:if test="${isLast eq true}">
-                <input type="submit" class="btn btn-primary btn-margin" value="<fmt:message key="Finish" bundle="${bundle}"/>">
-            </c:if>
+            <c:choose>
+                <c:when test="${isLast eq false}">
+                    <input type="submit" class="btn btn-primary btn-margin"
+                           value="<fmt:message key="Next" bundle="${bundle}"/>">
+                </c:when>
+                <c:otherwise>
+                    <input type="submit" class="btn btn-primary btn-margin"
+                           value="<fmt:message key="Finish" bundle="${bundle}"/>">
+                </c:otherwise>
+            </c:choose>
         </form>
 
         <%--<fmt:message key="Explanation" bundle="${bundle}"/>: ${question.explanation}--%>

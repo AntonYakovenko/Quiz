@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="show-error.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page errorPage="show-error.jsp" %>
 <c:set var="exception" value="${requestScope['javax.servlet.error.exception']}"/>
 <fmt:setLocale value="${sessionScope.locale eq null ? 'en_US' : sessionScope.locale}"/>
 <c:if test="${sessionScope.locale eq null}">
@@ -27,14 +27,17 @@
     <ul>
         <li><fmt:message key="Description" bundle="${bundle}"/>: ${quiz.description}</li>
         <form action="./question.do?id=${firstId}" method="post">
-            <c:if test="${completed eq true}">
-                <div class="alert alert-danger col-4" role="alert">
-                    <fmt:message key="You've_already_passed_this_quiz" bundle="${bundle}"/>
-                </div>
-            </c:if>
-            <c:if test="${completed eq false}">
-                <input type="submit" class="btn btn-primary btn-margin" value="<fmt:message key="Start" bundle="${bundle}"/>">
-            </c:if>
+            <c:choose>
+                <c:when test="${completed eq true}">
+                    <div class="alert alert-danger col-4" role="alert">
+                        <fmt:message key="You've_already_passed_this_quiz" bundle="${bundle}"/>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <input type="submit" class="btn btn-primary btn-margin"
+                           value="<fmt:message key="Start" bundle="${bundle}"/>">
+                </c:otherwise>
+            </c:choose>
         </form>
     </ul>
 
@@ -49,6 +52,7 @@
     <h3 class="header"><b><fmt:message key="Bucket" bundle="${bundle}"/></b></h3>
     <ul>
         <c:forEach var="quizInBucket" items="${quizzesInBucket}">
+
             <li><a href="./quiz.do?id=${quizInBucket.id}">${quizInBucket.name}</a>(<a
                     href="./quizRemoveFromBucket.do?id=${quizInBucket.id}&redirectToId=${redirectToQuizId}">X</a>)
             </li>

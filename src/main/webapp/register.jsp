@@ -31,14 +31,14 @@
         <div class="form-row">
             <div class="col-3">
                 <label for="login"><fmt:message key="Login" bundle="${bundle}"/>:</label>
-                <br><input name="login" id="login" type="text" class="form-control" value="${login}" placeholder
+                <br><input name="login" id="login" type="text" class="form-control" placeholder
                     ="<fmt:message key="Enter_login" bundle="${bundle}"/>..."/>
                 <c:if test="${errorMap.login ne null}"><span class="alert-danger"> ${errorMap.login}</span></c:if>
             </div>
 
             <div class="col-3">
                 <label for="name"><fmt:message key="Name" bundle="${bundle}"/>:</label>
-                <br><input name="name" id="name" type="text" class="form-control" value="${name}" placeholder
+                <br><input name="name" id="name" type="text" class="form-control" placeholder
                     ="<fmt:message key="Enter_name" bundle="${bundle}"/>..."/>
                 <c:if test="${errorMap.name ne null}"><span class="alert-danger"> ${errorMap.name}</span></c:if>
             </div>
@@ -47,14 +47,14 @@
         <div class="form-row">
             <div class="col-3">
                 <label for="password"><fmt:message key="Password" bundle="${bundle}"/>:</label>
-                <br><input name="password" id="password" type="password" class="form-control" value="${password}"
+                <br><input name="password" id="password" type="password" class="form-control"
                            placeholder="<fmt:message key="Enter_password" bundle="${bundle}"/>..."/>
                 <c:if test="${errorMap.password ne null}"><span class="alert-danger"> ${errorMap.password}</span></c:if>
             </div>
 
             <div class="col-3">
                 <label for="email"><fmt:message key="Email" bundle="${bundle}"/>:</label>
-                <br><input name="email" id="email" type="text" class="form-control" value="${email}" placeholder
+                <br><input name="email" id="email" type="text" class="form-control" placeholder
                 ="<fmt:message key="Enter_email" bundle="${bundle}"/>..."/>
                 <c:if test="${errorMap.email ne null}"><span class="alert-danger"> ${errorMap.email}</span></c:if>
             </div>

@@ -27,13 +27,13 @@ import static com.company.util.ClassName.getCurrentClassName;
 
 @WebServlet(name = "quizController", urlPatterns = "/quiz.do")
 public class QuizController extends DependencyInjectionServlet {
-    public static final String PARAM_ID = "id";
-    public static final String ATTRIBUTE_QUIZ_TO_VIEW = "quiz";
-    public static final String ATTRIBUTE_REDIRECT_TO_QUIZ_ID = "redirectToQuizId";
-    public static final String ATTRIBUTE_QUIZ_COMPLETED = "completed";
-    public static final String FIRST_ID = "firstId";
-    public static final String PAGE_OK = "quiz.jsp";
-    public static final String PAGE_ERROR = "show-error.jsp";
+    static final String PARAM_ID = "id";
+    private static final String ATTRIBUTE_QUIZ_TO_VIEW = "quiz";
+    private static final String ATTRIBUTE_REDIRECT_TO_QUIZ_ID = "redirectToQuizId";
+    private static final String ATTRIBUTE_QUIZ_COMPLETED = "completed";
+    private static final String FIRST_ID = "firstId";
+    private static final String PAGE_OK = "quiz.jsp";
+    static final String PAGE_ERROR = "show-error.jsp";
 
     private static final Logger logger = Logger.getLogger(getCurrentClassName());
 
